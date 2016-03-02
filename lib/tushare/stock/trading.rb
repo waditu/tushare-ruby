@@ -43,7 +43,7 @@ module Tushare
         cols = DAY_PRICE_COLUMNS
       end
 
-      puts url 
+      #puts url 
 
       resp = HTTParty.get(url)
       if resp.code.to_s == "200"
