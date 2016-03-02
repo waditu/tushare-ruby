@@ -25,14 +25,18 @@ module Tushare
     #  -------
     #    DataFrame
     #        属性:日期 ，开盘价， 最高价， 收盘价， 最低价， 成交量， 价格变动 ，涨跌幅，5日均价，10日均价，20日均价，5日均量，10日均量，20日均量，换手率
-    def get_hist_data(code, start_date="", end_date="", ktype = 'D', retry_count = 3, pause = 0.001, ascending = false)
+    def get_hist_data(code, options = {})
+      
       symbol_code = _code_to_symbol(code)
+
       raise 'invalid code' if symbol_code == ""
 
-      if K_LABELS.include?(ktype.upcase)
-        url = sprintf(DAY_PRICE_URL, P_TYPE["http"], DOMAINS["ifeng"], K_TYPE[ktype.upcase], symbol_code)
-      elsif K_MIN_LABELS.include?(ktype)
-        url = sprintf(DAY_PRICE_MIN_URL, P_TYPE["http"], DOMAINS["ifeng"], symbol_code, ktype)
+      options = { start_date: "", end_date: "", ktype: 'D', retry_count: 3, pause: 0.001, ascending: false }.merge(options)
+
+      if K_LABELS.include?(options[:ktype].upcase)
+        url = sprintf(DAY_PRICE_URL, P_TYPE["http"], DOMAINS["ifeng"], K_TYPE[options[:ktype].upcase], symbol_code)
+      elsif K_MIN_LABELS.include?(options[:ktype])
+        url = sprintf(DAY_PRICE_MIN_URL, P_TYPE["http"], DOMAINS["ifeng"], symbol_code, options[:ktype])
       else 
         raise 'ktype input error.'
       end 
@@ -51,9 +55,9 @@ module Tushare
         if records.size > 0
           cols = INX_DAY_PRICE_COLUMNS if records.first.size == 14
 
-          records.reverse! if ascending == false 
-          if start_date != '' and end_date != ''
-            records = records.select{|x| Time.parse(x[0]) <= Time.parse("#{end_date} 23:59") and Time.parse(x[0]) >= Time.parse("#{start_date} 00:00")}
+          records.reverse! if options[:ascending] == false 
+          if options[:start_date] != '' and options[:end_date] != ''
+            records = records.select{|x| Time.parse(x[0]) <= Time.parse("#{options[:end_date]} 23:59") and Time.parse(x[0]) >= Time.parse("#{options[:start_date]} 00:00")}
           end
 
           records.map{|r| Hash[cols.zip(r)]}
