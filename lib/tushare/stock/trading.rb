@@ -3,6 +3,7 @@ require 'tushare/util'
 module Tushare 
 
   module Stock 
+
     include Tushare::Util 
 
     ## 
@@ -17,10 +18,6 @@ module Tushare
     #                结束日期 format：YYYY-MM-DD 为空时取到最近一个交易日数据
     #    ktype：string
     #                数据类型，D=日k线 W=周 M=月 5=5分钟 15=15分钟 30=30分钟 60=60分钟，默认为D
-    #    retry_count : int, 默认 3
-    #               如遇网络等问题重复执行的次数 
-    #    pause : int, 默认 0
-    #              重复请求数据过程中暂停的秒数，防止请求间隔时间太短出现的问题
     #  return
     #  -------
     #    DataFrame
@@ -31,7 +28,7 @@ module Tushare
 
       raise 'invalid code' if symbol_code == ""
 
-      options = { start_date: "", end_date: "", ktype: 'D', retry_count: 3, pause: 0.001, ascending: false }.merge(options)
+      options = { start_date: "", end_date: "", ktype: 'D', ascending: false }.merge(options)
 
       if K_LABELS.include?(options[:ktype].upcase)
         url = sprintf(DAY_PRICE_URL, P_TYPE["http"], DOMAINS["ifeng"], K_TYPE[options[:ktype].upcase], symbol_code)
@@ -72,10 +69,6 @@ module Tushare
     #                股票代码 e.g. 600848
     #      date:string
     #                日期 format：YYYY-MM-DD
-    #      retry_count : int, 默认 3
-    #                如遇网络等问题重复执行的次数
-    #      pause : int, 默认 0
-    #               重复请求数据过程中暂停的秒数，防止请求间隔时间太短出现的问题
     #   return
     #   -------
     #      DataFrame 当日所有股票交易数据(DataFrame)
