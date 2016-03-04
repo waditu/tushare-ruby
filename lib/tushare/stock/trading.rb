@@ -47,8 +47,6 @@ module Tushare
         cols = DAY_PRICE_COLUMNS
       end
 
-      #puts url 
-
       resp = HTTParty.get(url)
       if resp.code.to_s == "200"
         records = JSON.parse(resp.body)["record"]
@@ -65,6 +63,37 @@ module Tushare
       else 
         []
       end
+    end 
+    #  """
+    #      获取分笔数据
+    #  Parameters
+    #  ------
+    #      code:string
+    #                股票代码 e.g. 600848
+    #      date:string
+    #                日期 format：YYYY-MM-DD
+    #      retry_count : int, 默认 3
+    #                如遇网络等问题重复执行的次数
+    #      pause : int, 默认 0
+    #               重复请求数据过程中暂停的秒数，防止请求间隔时间太短出现的问题
+    #   return
+    #   -------
+    #      DataFrame 当日所有股票交易数据(DataFrame)
+    #            属性:成交时间、成交价格、价格变动，成交手、成交金额(元)，买卖类型
+    #  """
+    def get_tick_data(code, date)
+      symbol_code = _code_to_symbol(code)
+      raise 'invalid code' if symbol_code == "" 
+
+      url = sprintf(TICK_PRICE_URL, P_TYPE["http"], DOMAINS["sf"], PAGES["dl"], date, symbol_code)
+      resp = HTTParty.get(url)
+      if resp.code.to_s == "200"
+        tb_value = resp.body.encode("utf-8", "gbk")
+        CSV.new(tb_value, :headers => :first_row, encoding: 'utf-8', :col_sep => "\t").map {|a| Hash[ TICK_COLUMNS.zip(a.fields) ] }
+      else 
+        []
+      end
+
     end 
 
   end 
