@@ -74,11 +74,16 @@ module Tushare
     #      DataFrame 当日所有股票交易数据(DataFrame)
     #            属性:成交时间、成交价格、价格变动，成交手、成交金额(元)，买卖类型
     #  """
-    def get_tick_data(code, date)
+    def get_tick_data(code, date = '')
+      return nil if code.nil? or code.size != 6 or date == ''
+
       symbol_code = _code_to_symbol(code)
       raise 'invalid code' if symbol_code == "" 
 
+
       url = sprintf(TICK_PRICE_URL, P_TYPE["http"], DOMAINS["sf"], PAGES["dl"], date, symbol_code)
+      puts url 
+
       resp = HTTParty.get(url)
       if resp.code.to_s == "200"
         tb_value = resp.body.encode("utf-8", "gbk")
@@ -86,6 +91,46 @@ module Tushare
       else 
         []
       end
+
+    end 
+    #  """
+    #      获取sina大单数据
+    #  Parameters
+    #  ------
+    #      code:string
+    #                股票代码 e.g. 600848
+    #      date:string
+    #                日期 format：YYYY-MM-DD
+    #      retry_count : int, 默认 3
+    #                如遇网络等问题重复执行的次数
+    #      pause : int, 默认 0
+    #               重复请求数据过程中暂停的秒数，防止请求间隔时间太短出现的问题
+    #   return
+    #   -------
+    #      DataFrame 当日所有股票交易数据(DataFrame)
+    #            属性:股票代码    股票名称    交易时间    价格    成交量    前一笔价格    类型（买、卖、中性盘）
+    #  """
+    def get_sina_dd(code, options = {})
+      return nil if code.nil? or code.size != 6 
+      symbol_code = _code_to_symbol(code)
+      raise 'invalid code' if symbol_code == ""       
+      
+      options = {date: Time.now.strftime("%Y-%m-%d"), vol: 400}.merge(options)
+
+      vol = options[:vol] * 100
+      url = sprintf(SINA_DD, P_TYPE["http"], DOMAINS["vsf"], PAGES["sinadd"], symbol_code, vol, options[:date])
+      resp = HTTParty.get(url)
+      if resp.code.to_s == "200"
+        val = resp.body.encode("utf-8", "gbk")
+        CSV.new(val, :headers => :first_row, encoding: 'utf-8', :col_sep => ",").map do |a|   
+          fields = a.fields 
+          fields[0] = fields[0][2, fields.size - 1]
+          Hash[ SINA_DD_COLS.zip(fields) ]
+        end
+      else 
+        []
+      end
+
 
     end 
 

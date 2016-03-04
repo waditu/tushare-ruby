@@ -121,7 +121,7 @@ module Tushare
     # 生成symbol代码标志
     def _code_to_symbol(code)
       return INDEX_LIST[code] if INDEX_LABELS.include?(code)
-      return ""               if code.size != 6
+      return ""               if code.nil? or code.size != 6
       ["5","6","9"].include?(code[0]) ? "sh#{code}" : "sz#{code}"
     end 
 
