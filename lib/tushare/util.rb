@@ -125,6 +125,10 @@ module Tushare
       ["5","6","9"].include?(code[0]) ? "sh#{code}" : "sz#{code}"
     end 
 
+    def _write_console()
+      $stdout.write(DATA_GETTING_FLAG)
+      $stdout.flush()
+    end
   end 
 
 end

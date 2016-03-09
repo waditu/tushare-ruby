@@ -1,8 +1,10 @@
 require 'tushare/util' 
+require 'nokogiri'
+require 'open-uri'
 
 module Tushare 
 
-  module Stock 
+  class Stock 
 
     include Tushare::Util 
 
@@ -124,16 +126,67 @@ module Tushare
         val = resp.body.encode("utf-8", "gbk")
         CSV.new(val, :headers => :first_row, encoding: 'utf-8', :col_sep => ",").map do |a|   
           fields = a.fields 
-          fields[0] = fields[0][2, fields.size - 1]
+          fields[0] = fields[0][2..-1]
           Hash[ SINA_DD_COLS.zip(fields) ]
         end
       else 
         []
       end
 
+    end 
+    #  """
+    #      获取当日分笔明细数据
+    #  Parameters
+    #  ------
+    #      code:string
+    #                股票代码 e.g. 600848
+    #      retry_count : int, 默认 3
+    #                如遇网络等问题重复执行的次数
+    #      pause : int, 默认 0
+    #               重复请求数据过程中暂停的秒数，防止请求间隔时间太短出现的问题
+    #   return
+    #   -------
+    #      DataFrame 当日所有股票交易数据(DataFrame)
+    #            属性:成交时间、成交价格、价格变动，成交手、成交金额(元)，买卖类型
+    #  """
+    def get_today_ticks(code) 
+      return nil if code.nil? or code.size != 6 
+      symbol_code = _code_to_symbol(code)
+      raise 'invalid code' if symbol_code == ""  
 
+      all_ticks = []
+
+      url = sprintf(TODAY_TICKS_PAGE_URL, P_TYPE["http"], DOMAINS["vsf"], PAGES["jv"], Time.now.strftime("%Y-%m-%d"), symbol_code)
+      resp = HTTParty.get(url)
+      if resp.code.to_s == "200"
+        val = eval(resp.body[1..-2])
+        pages = val[:detailPages].sort{|x,y| x[:page] <=> y[:page]}
+        date  = Time.now.strftime("%Y-%m-%d")
+        pages.each do |page|
+          _write_console()
+          _today_ticks(symbol_code, date, page[:page], all_ticks)
+        end 
+        all_ticks
+      else 
+        []
+      end
+    end 
+
+    protected 
+
+    def _today_ticks(symbol, tdate, pageNo, ticks)
+      url = sprintf(TODAY_TICKS_URL, P_TYPE["http"], DOMAINS["vsf"], PAGES["t_ticks"], symbol, tdate, pageNo)
+      doc = Nokogiri::HTML(open(url), nil, "gbk")
+      doc.css("table#datatbl > tbody > tr").each do |tr|
+        items = []
+        tr.children.each do |td|
+          items << td.content.gsub(/\s+/,'').gsub("--", "0").gsub("%","")
+        end 
+        ticks << Hash[TODAY_TICK_COLUMNS.zip(items)] if items.size > 0
+      end
     end 
 
   end 
+  
 
 end

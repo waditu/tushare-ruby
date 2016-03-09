@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "httparty", "~> 0.13.3"
+  spec.add_dependency "nokogiri", "~> 1.6.7"
   spec.add_dependency "table_print", "~> 1.5.4"
   spec.add_dependency "awesome_print", "~> 1.6.1"
 

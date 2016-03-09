@@ -4,6 +4,7 @@ PATH
     tushare (0.1.0)
       awesome_print (~> 1.6.1)
       httparty (~> 0.13.3)
+      nokogiri (~> 1.6.7)
       table_print (~> 1.5.4)
 
 GEM
@@ -15,7 +16,10 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     json (1.8.3)
+    mini_portile2 (2.0.0)
     multi_xml (0.5.5)
+    nokogiri (1.6.7)
+      mini_portile2 (~> 2.0.0.rc2)
     rake (10.4.2)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
