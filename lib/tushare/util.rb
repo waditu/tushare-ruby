@@ -128,6 +128,10 @@ module Tushare
     def _write_console()
       $stdout.write(DATA_GETTING_FLAG)
       $stdout.flush()
+    end 
+    def _write_head()
+      $stdout.write(DATA_GETTING_TIPS)
+      $stdout.flush()
     end
   end 
 

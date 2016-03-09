@@ -162,6 +162,7 @@ module Tushare
         val = eval(resp.body[1..-2])
         pages = val[:detailPages].sort{|x,y| x[:page] <=> y[:page]}
         date  = Time.now.strftime("%Y-%m-%d")
+        _write_head()
         pages.each do |page|
           _write_console()
           _today_ticks(symbol_code, date, page[:page], all_ticks)
@@ -171,6 +172,29 @@ module Tushare
         []
       end
     end 
+    #   """
+    #       一次性获取最近一个日交易日所有股票的交易数据
+    #   return
+    #   -------
+    #     DataFrame
+    #          属性：代码，名称，涨跌幅，现价，开盘价，最高价，最低价，最日收盘价，成交量，换手率
+    #   """
+    def get_today_all()
+      _write_head() 
+      all_data = []
+      data = _parsing_dayprice_json(1)
+      unless data.nil?
+        all_data << data
+        (2...PAGE_NUM[0]).each do |page|
+          nd = _parsing_dayprice_json(page)
+          all_data << nd unless nd.nil?
+        end 
+        all_data.flatten!
+      end
+      all_data 
+
+    end 
+
 
     protected 
 
@@ -183,6 +207,33 @@ module Tushare
           items << td.content.gsub(/\s+/,'').gsub("--", "0").gsub("%","")
         end 
         ticks << Hash[TODAY_TICK_COLUMNS.zip(items)] if items.size > 0
+      end
+    end 
+    #  """
+    #         处理当日行情分页数据，格式为json
+    #   Parameters
+    #   ------
+    #      pageNum:页码
+    #   return
+    #   -------
+    #      DataFrame 当日所有股票交易数据(DataFrame)
+    #  """
+    def _parsing_dayprice_json(pageNum=1)
+      _write_console() 
+      url = sprintf(SINA_DAY_PRICE_URL, P_TYPE["http"], DOMAINS["vsf"], PAGES["jv"], pageNum)
+      #puts url 
+
+      resp = HTTParty.get(url)
+      if resp.code.to_s == "200"
+        val = resp.body.encode("utf-8", "gbk")
+        return nil if val == "null"
+        hs   = eval(val)
+        cols = DAY_TRADING_COLUMNS.clone
+        cols.delete('symbol')
+        hs.map{|x| t = {}; cols.each{|c| t[c.to_sym] = x[c.to_sym]};  t}
+
+      else 
+        nil
       end
     end 
 

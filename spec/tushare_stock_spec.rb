@@ -23,9 +23,12 @@ describe Tushare::Stock do
     end 
 
     it 'can get today ticks' do 
-      tp @stock.get_today_ticks("600848")
+      #tp @stock.get_today_ticks("600848")
 
-    end
+    end 
+    it 'can get today all data' do 
+      ap @stock.get_today_all
+    end 
   end
 
 end
