@@ -46,6 +46,8 @@ module Tushare
         cols = DAY_PRICE_COLUMNS
       end
 
+      puts url 
+
       resp = HTTParty.get(url)
       if resp.code.to_s == "200"
         records = JSON.parse(resp.body)["record"]
@@ -177,7 +179,7 @@ module Tushare
     #   return
     #   -------
     #     DataFrame
-    #          属性：代码，名称，涨跌幅，现价，开盘价，最高价，最低价，最日收盘价，成交量，换手率
+    #          属性：代码，名称，涨跌幅，现价，开盘价，最高价，最低价，前日收盘价，成交量，换手率
     #   """
     def get_today_all()
       _write_head() 
@@ -231,6 +233,7 @@ module Tushare
         cols = DAY_TRADING_COLUMNS.clone
         cols.delete('symbol')
         hs.map{|x| t = {}; cols.each{|c| t[c.to_sym] = x[c.to_sym]};  t}
+
 
       else 
         nil

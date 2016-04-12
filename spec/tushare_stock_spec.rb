@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+#bundle exec rspec spec
 describe Tushare::Stock do
   
   before do 
@@ -9,8 +10,9 @@ describe Tushare::Stock do
   describe "Trading" do 
     it 'can get hist data' do 
       #tp @stock.get_hist_data("sh",  start_date: "2016-03-01", end_date: "2016-03-02" )
-      #tp @stock.get_hist_data('600848', ktype: '30')
-      #tp @stock.get_hist_data("002411")
+      ap @stock.get_hist_data('300027')
+      #ap @stock.get_hist_data('600848', ktype: '30')
+      #tp @stock.get_hist_data("002606", start_date: "2016-02-01", end_date: "2016-03-11")
       #tp @stock.get_hist_data("002411", start_date: "2016-03-01", end_date: "2016-03-02")
     end 
 
@@ -27,7 +29,7 @@ describe Tushare::Stock do
 
     end 
     it 'can get today all data' do 
-      ap @stock.get_today_all
+      #ap @stock.get_today_all
     end 
   end
 
