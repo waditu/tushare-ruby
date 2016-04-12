@@ -1,6 +1,6 @@
-module Tushare 
-  
-  module Util 
+module Tushare
+
+  module Util
     K_LABELS = ['D', 'W', 'M']
     K_MIN_LABELS = ['5', '15', '30', '60']
     K_TYPE = {'D'=> 'akdaily', 'W'=> 'akweekly', 'M'=> 'akmonthly'}
@@ -12,7 +12,7 @@ module Tushare
     #FORMAT = lambda x: '%.2f' % x
     DOMAINS = {'sina'=> 'sina.com.cn', 'sinahq'=> 'sinajs.cn',
                'ifeng'=> 'ifeng.com', 'sf'=> 'finance.sina.com.cn',
-               'vsf'=> 'vip.stock.finance.sina.com.cn', 
+               'vsf'=> 'vip.stock.finance.sina.com.cn',
                'idx'=> 'www.csindex.com.cn', '163'=> 'money.163.com',
                'em'=> 'eastmoney.com', 'sseq'=> 'query.sse.com.cn',
                'sse'=> 'www.sse.com.cn', 'szse'=> 'www.szse.cn',
@@ -72,7 +72,7 @@ module Tushare
     SHIBOR_TYPE ={'Shibor'=> 'Shibor数据', 'Quote'=> '报价数据', 'Tendency'=> 'Shibor均值数据',
                   'LPR'=> 'LPR数据', 'LPR_Tendency'=> 'LPR均值数据'}
     SHIBOR_DATA_URL = '%s%s/shibor/web/html/%s?nameNew=Historical_%s_Data_%s.xls&downLoadPath=data&nameOld=%s%s.xls&shiborSrc=http://www.shibor.org/shibor/'
-    #ALL_STOCK_BASICS_FILE = '%s%s/static/all.csv'%(P_TYPE['http'], DOMAINS['oss'])
+    ALL_STOCK_BASICS_FILE = '%s%s/static/all.csv' % [P_TYPE['http'], DOMAINS['oss']]
     SINA_CONCEPTS_INDEX_URL = '%smoney.%s/q/view/%s?param=class'
     SINA_INDUSTRY_INDEX_URL = '%s%s/q/view/%s'
     SINA_DATA_DETAIL_URL = '%s%s/quotes_service/api/%s/Market_Center.getHQNodeData?page=1&num=400&sort=symbol&asc=1&node=%s&symbol=&_s_r_a=page'
@@ -123,16 +123,23 @@ module Tushare
       return INDEX_LIST[code] if INDEX_LABELS.include?(code)
       return ""               if code.nil? or code.size != 6
       ["5","6","9"].include?(code[0]) ? "sh#{code}" : "sz#{code}"
-    end 
+    end
 
     def _write_console()
       $stdout.write(DATA_GETTING_FLAG)
       $stdout.flush()
-    end 
+    end
     def _write_head()
       $stdout.write(DATA_GETTING_TIPS)
       $stdout.flush()
     end
-  end 
 
+    def check_year(year)
+      fail "year param: #{year} is wrong format" if year.to_i < 1989
+    end
+
+    def check_quarter(quarter)
+      fail "quarter param: #{quarter} is wrong" unless (1..4).cover? quarter
+    end
+  end
 end
