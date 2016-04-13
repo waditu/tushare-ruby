@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 #bundle exec rspec spec
-describe Tushare::Stock do
+describe Tushare::Stock::Trading do
   
   before do 
-    @stock = Tushare::Stock.new
+    @stock = Tushare::Stock::Trading
   end
   
   describe "Trading" do 
@@ -17,19 +17,18 @@ describe Tushare::Stock do
     end 
 
     it 'can get tick data' do 
-      #tp get_tick_data('600848', '2015-04-07')
+      tp get_tick_data('600848', '2015-04-07')
     end 
 
     it 'can get sina dd' do 
-      #tp get_sina_dd('600848', vol: 200, date: '2016-03-02')
+      tp get_sina_dd('600848', vol: 200, date: '2016-03-02')
     end 
 
     it 'can get today ticks' do 
-      #tp @stock.get_today_ticks("600848")
-
+      tp @stock.get_today_ticks("600848")
     end 
     it 'can get today all data' do 
-      #ap @stock.get_today_all
+      ap @stock.get_today_all
     end 
   end
 

@@ -1,8 +1,9 @@
 require 'spec_helper'
 
-describe Tushare::Stock do
-  before do
-    @stock = Tushare::Stock.new
+describe Tushare::Stock::Fundamental do
+  
+  before do 
+    @stock = Tushare::Stock::Fundamental
   end
 
   describe 'Fundamental' do
@@ -35,3 +36,4 @@ describe Tushare::Stock do
     end
   end
 end
+
