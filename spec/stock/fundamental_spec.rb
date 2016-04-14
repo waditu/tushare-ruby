@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe Tushare::Stock::Fundamental do
-  
-  before do 
+  before do
     @stock = Tushare::Stock::Fundamental
   end
 
@@ -36,4 +35,3 @@ describe Tushare::Stock::Fundamental do
     end
   end
 end
-
