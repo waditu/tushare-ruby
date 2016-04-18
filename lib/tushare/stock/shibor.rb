@@ -5,7 +5,6 @@ module Tushare
     # 上海银行间同业拆放利率（Shibor）数据接口
     module Shibor
       extend Tushare::Util
-      extend self
 
       # 获取上海银行间同业拆放利率（Shibor）
       # Parameters
@@ -129,6 +128,9 @@ module Tushare
         end
         result
       end
+
+      module_function :shibor_data, :shibor_quote_data, :shibor_ma_data,
+                      :lpr_data, :lpr_ma_data, :process_xls_file
     end
   end
 end
