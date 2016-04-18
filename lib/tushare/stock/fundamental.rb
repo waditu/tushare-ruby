@@ -1,10 +1,12 @@
 require 'tushare/util'
 
 module Tushare
-  module Stock 
-    module Fundamental 
-      extend Tushare::Util 
-      extend self 
+  module Stock
+    module Fundamental
+      extend Tushare::Util
+
+      module_function
+
       ##
       # 获取沪深上市公司基本情况
       # Return
@@ -220,7 +222,7 @@ module Tushare
           page += 1
         end
         result
-      end 
+      end
     end
   end
 end
