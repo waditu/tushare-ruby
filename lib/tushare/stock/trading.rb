@@ -7,8 +7,6 @@ module Tushare
     module Trading
       extend Tushare::Util
 
-      module_function
-
       #  获取个股历史交易记录
       #  Parameters
       #  ------
@@ -235,6 +233,10 @@ module Tushare
             nil
           end
         end
+
+      module_function :get_hist_data, :get_tick_data, :get_sina_dd,
+                      :get_today_ticks, :get_today_all, :_today_ticks,
+                      :_parsing_dayprice_json
     end
   end
 

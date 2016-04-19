@@ -4,8 +4,6 @@ module Tushare
   module Stock
     module Fundamental
       extend Tushare::Util
-      
-      module_function
 
       # 获取沪深上市公司基本情况
       # Return
@@ -225,6 +223,10 @@ module Tushare
         end
         result
       end
+
+      module_function :get_stock_basics, :get_report_data, :get_profit_data,
+                      :get_operation_data, :get_growth_data, :get_data,
+                      :get_debtpaying_data, :get_cashflow_data, :process_data
     end
   end
 end
