@@ -5,6 +5,7 @@ require 'roo-xls'
 require 'tushare/stock/trading'
 require 'tushare/stock/fundamental'
 require 'tushare/stock/shibor'
+require 'tushare/stock/reference'
 
 module Tushare
   # Your code goes here...
