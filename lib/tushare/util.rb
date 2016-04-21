@@ -9,7 +9,7 @@ module Tushare
     'http' => 'http://',
     'ftp' => 'ftp://'
   }.freeze
-  PAGE_NUM = [38, 60, 80, 100]
+  PAGE_NUM = [38, 60, 80, 100].freeze
   #FORMAT = lambda x: '%.2f' % x
   DOMAINS = {
     'sina' => 'sina.com.cn',
@@ -59,7 +59,7 @@ module Tushare
                          'trade', 'open', 'high', 'low', 'settlement', 'volume', 'turnoverratio']
   REPORT_COLS = ['code', 'name', 'eps', 'eps_yoy', 'bvps', 'roe',
                  'epcf', 'net_profits', 'profits_yoy', 'distrib', 'report_date']
-  FORECAST_COLS = ['code', 'name', 'type', 'report_date', 'pre_eps', 'range']
+  FORECAST_COLS = %w(code name type report_date pre_eps range).freeze
   PROFIT_COLS = ['code', 'name', 'roe', 'net_profit_ratio',
                  'gross_profit_rate', 'net_profits', 'eps', 'business_income', 'bips']
   OPERATION_COLS = ['code', 'name', 'arturnover', 'arturndays', 'inventory_turnover',
@@ -87,7 +87,7 @@ module Tushare
   DAY_PRICE_MIN_URL = '%sapi.finance.%s/akmin?scode=%s&type=%s'
   SINA_DAY_PRICE_URL = '%s%s/quotes_service/api/%s/Market_Center.getHQNodeData?num=80&sort=changepercent&asc=0&node=hs_a&symbol=&_s_r_a=page&page=%s'
   REPORT_URL = '%s%s/q/go.php/vFinanceAnalyze/kind/mainindex/%s?s_i=&s_a=&s_c=&reportdate=%s&quarter=%s&p=%s&num=%s'
-  FORECAST_URL = '%s%s/q/go.php/vFinanceAnalyze/kind/performance/%s?s_i=&s_a=&s_c=&s_type=&reportdate=%s&quarter=%s&p=%s&num=%s'
+  FORECAST_URL = '%s%s/q/go.php/vFinanceAnalyze/kind/performance/%s?s_i=&s_a=&s_c=&s_type=&reportdate=%s&quarter=%s&p=%s&num=%s'.freeze
   PROFIT_URL = '%s%s/q/go.php/vFinanceAnalyze/kind/profit/%s?s_i=&s_a=&s_c=&reportdate=%s&quarter=%s&p=%s&num=%s'
   OPERATION_URL = '%s%s/q/go.php/vFinanceAnalyze/kind/operation/%s?s_i=&s_a=&s_c=&reportdate=%s&quarter=%s&p=%s&num=%s'
   GROWTH_URL = '%s%s/q/go.php/vFinanceAnalyze/kind/grow/%s?s_i=&s_a=&s_c=&reportdate=%s&quarter=%s&p=%s&num=%s'
@@ -145,6 +145,48 @@ module Tushare
   TOKEN_F_P = 'tk.csv'
   TOKEN_ERR_MSG = '请设置通联数据接口的token凭证码'
   BOX_INPUT_ERR_MSG = '请输入YYYY-MM格式的年月数据'
+  DP_URL = '%sapp.finance.%s/data/stock/%s?day=&page=%s'
+  DP_163_URL = '%squotes.%s/data/caibao/%s?reportdate=%s&sort=declaredate&order=desc&page=%s'.freeze
+  FUND_HOLDS_URL = '%squotes.%s/hs/marketdata/service/%s?host=/hs/marketdata/service/%s&page=%s&query=start:%s;end:%s&order=desc&count=60&type=query&req=%s'
+  XSG_URL = '%sdatainterface.%s/EM_DataCenter/%s?type=FD&sty=BST&st=3&sr=true&fd=%s&stat=%s'.freeze
+  LHB_URL = '%sdata.%s/stock/lhb/%s.html'
+  LHB_SINA_URL = '%s%s/q/go.php/vLHBData/kind/%s/%s?last=%s&p=%s'
+  LHB_COLS = ['code', 'name', 'pchange', 'amount', 'buy', 'bratio', 'sell', 'sratio', 'reason']
+  NEW_STOCKS_URL = '%s%s/corp/view/%s?page=%s&cngem=0&orderBy=NetDate&orderType=desc'.freeze
+  MAR_SH_HZ_URL = '%s%s/marketdata/tradedata/%s?jsonCallBack=jsonpCallback%s&isPagination=true&tabType=&pageHelp.pageSize=100&beginDate=%s&endDate=%s%s&_=%s'
+  MAR_SH_HZ_REF_URL = '%s%s/market/dealingdata/overview/margin/'
+  MAR_SH_MX_URL = '%s%s/marketdata/tradedata/%s?jsonCallBack=jsonpCallback%s&isPagination=true&tabType=mxtype&detailsDate=%s&pageHelp.pageSize=100&stockCode=%s&beginDate=%s&endDate=%s%s&_=%s'.freeze
+  MAR_SZ_HZ_URL = '%s%s/szseWeb/%s?SHOWTYPE=EXCEL&ACTIONID=8&CATALOGID=1837_xxpl&txtDate=%s&tab2PAGENUM=1&ENCODE=1&TABKEY=tab1'.freeze
+  MAR_SZ_MX_URL = '%s%s/szseWeb/%s?SHOWTYPE=EXCEL&ACTIONID=8&CATALOGID=1837_xxpl&txtDate=%s&tab2PAGENUM=1&ENCODE=1&TABKEY=tab2'.freeze
+  MAR_SH_HZ_TAIL_URL = '&pageHelp.pageNo=%s&pageHelp.beginPage=%s&pageHelp.endPage=%s'.freeze
+  TERMINATED_URL = '%s%s/%s?jsonCallBack=jsonpCallback%s&isPagination=true&sqlId=COMMON_SSE_ZQPZ_GPLB_MCJS_ZZSSGGJBXX_L&pageHelp.pageSize=50&_=%s'
+  SUSPENDED_URL = '%s%s/%s?jsonCallBack=jsonpCallback%s&isPagination=true&sqlId=COMMON_SSE_ZQPZ_GPLB_MCJS_ZTSSGS_L&pageHelp.pageSize=50&_=%s'
+  TERMINATED_T_COLS = ['COMPANY_CODE', 'COMPANY_ABBR', 'LISTING_DATE', 'CHANGE_DATE']
+  LHB_KINDS = ['ggtj', 'yytj', 'jgzz', 'jgmx']
+  LHB_GGTJ_COLS = ['code', 'name', 'count', 'bamount', 'samount', 'net', 'bcount', 'scount']
+  LHB_YYTJ_COLS = ['broker', 'count', 'bamount', 'bcount', 'samount', 'scount', 'top3']
+  LHB_JGZZ_COLS = ['code', 'name', 'bamount', 'bcount', 'samount', 'scount', 'net']
+  LHB_JGMX_COLS = ['code', 'name', 'date', 'bamount', 'samount', 'type']
+  TERMINATED_COLS = ['code', 'name', 'oDate', 'tDate']
+  DP_COLS = ['report_date', 'quarter', 'code', 'name', 'plan']
+  DP_163_COLS = %w(code name year plan report_date).freeze
+  XSG_COLS = %w(code name date count ratio).freeze
+  QUARTS_DIC = {
+    '1' => ['%s-12-31', '%s-03-31'],
+    '2' => ['%s-03-31', '%s-06-30'],
+    '3' => ['%s-06-30', '%s-09-30'],
+    '4' => ['%s-9-30', '%s-12-31']
+  }.freeze
+  FUND_HOLDS_COLS = ['count', 'clast', 'date', 'ratio', 'amount', 'nums','nlast', 'name', 'code']
+  NEW_STOCKS_COLS = ['code', 'name', 'ipo_date', 'issue_date', 'amount', 'markets', 'price', 'pe',
+                     'limit', 'funds', 'ballot']
+  MAR_SH_COOKIES = { '_gscu_1808689395' => '27850607moztu036' }.freeze
+  MAR_SH_HZ_COLS = %w(opDate rzye rzmre rqyl rqylje rqmcl rzrqjyzl).freeze
+  MAR_SH_MX_COLS = ['opDate', 'stockCode', 'securityAbbr', 'rzye', 'rzmre', 'rzche', 'rqyl', 'rqmcl', 'rqchl']
+  MAR_SZ_HZ_COLS = %w(rzmre rzye rqmcl rqyl rqye rzrqye).freeze
+  MAR_SZ_MX_COLS = %w(stockCode securityAbbr rzmre rzye rqmcl rqyl rqye rzrqye).freeze
+  MAR_SZ_HZ_MSG = 'please do not input more than a year,you can obtaining the data year by year.'.freeze
+  MAR_SZ_HZ_MSG2 = 'start and end date all need input.'.freeze
 
   module Util
     # 生成symbol代码标志
