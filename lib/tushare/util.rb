@@ -187,6 +187,14 @@ module Tushare
   MAR_SZ_MX_COLS = %w(stockCode securityAbbr rzmre rzye rqmcl rqyl rqye rzrqye).freeze
   MAR_SZ_HZ_MSG = 'please do not input more than a year,you can obtaining the data year by year.'.freeze
   MAR_SZ_HZ_MSG2 = 'start and end date all need input.'.freeze
+  # for NewsEvent
+  LATEST_URL = '%sroll.news.%s/interface/%s?col=43&spec=&type=&ch=03&k=&offset_page=0&offset_num=0&num=%s&asc=&page=1&r=0.%s'.freeze
+  LATEST_COLS = %w(classify title time url).freeze
+  LATEST_COLS_C = %w(classify title time url content).freeze
+  NOTICE_INFO_URL = '%s%s/corp/view/%s?stock_str=%s'.freeze
+  NOTICE_INFO_CLS = %w(title type date url).freeze
+  GUBA_SINA_URL = '%sguba.%s'.freeze
+  GUBA_SINA_COLS = %w(title content ptime rcounts).freeze
 
   module Util
     # 生成symbol代码标志

@@ -6,6 +6,7 @@ require 'tushare/stock/trading'
 require 'tushare/stock/fundamental'
 require 'tushare/stock/shibor'
 require 'tushare/stock/reference'
+require 'tushare/stock/news_event'
 
 module Tushare
   # Your code goes here...
