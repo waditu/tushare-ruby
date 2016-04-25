@@ -195,6 +195,25 @@ module Tushare
   NOTICE_INFO_CLS = %w(title type date url).freeze
   GUBA_SINA_URL = '%sguba.%s'.freeze
   GUBA_SINA_COLS = %w(title content ptime rcounts).freeze
+  # for Macro
+  MACRO_TYPE = %w(nation price fininfo).freeze
+  MACRO_URL = '%smoney.finance.%s/mac/api/jsonp.php/SINAREMOTECALLCALLBACK%s/MacPage_Service.get_pagedata?cate=%s&event=%s&from=0&num=%s&condition=&_=%s'.freeze
+  GDP_YEAR_COLS = %w(year gdp pc_gdp gnp pi si industry cons_industry ti
+                     trans_industry lbdy).freeze
+  GDP_QUARTER_COLS = %w(quarter gdp gdp_yoy pi pi_yoy si si_yoy ti ti_yoy).freeze
+  GDP_FOR_COLS = %w(year end_for for_rate asset_for asset_rate goods_for
+                    goods_rate).freeze
+  GDP_PULL_COLS = %w(year gdp_yoy pi si industry ti).freeze
+  GDP_CONTRIB_COLS = %w(year gdp_yoy pi si industry ti).freeze
+  CPI_COLS = %w(month cpi).freeze
+  PPI_COLS = %w(month ppiip ppi qm rmi pi cg food clothing roeu dcg).freeze
+  DEPOSIT_COLS = %w(date deposit_type rate).freeze
+  LOAN_COLS = %w(date loan_type rate).freeze
+  RRR_COLS = %w(date before now changed).freeze
+  MONEY_SUPPLY_COLS = %w(month m2 m2_yoy m1 m1_yoy m0 m0_yoy cd cd_yoy qm
+                         qm_yoy ftd ftd_yoy sd sd_yoy rests rests_yoy).freeze
+  MONEY_SUPPLY_BLA_COLS = %w(year m2 m1 m0 cd qm ftd sd rests).freeze
+
 
   module Util
     # 生成symbol代码标志
