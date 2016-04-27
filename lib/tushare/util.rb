@@ -1,3 +1,5 @@
+require 'net/ftp'
+
 module Tushare
   K_LABELS = ['D', 'W', 'M']
   K_MIN_LABELS = ['5', '15', '30', '60']
@@ -51,7 +53,8 @@ module Tushare
     'qmd' => 'queryMargin.do',
     'szsefc' => 'ShowReport.szse',
     'ssecq' => 'commonQuery.do',
-    'sinadd' => 'cn_bill_download.php'
+    'sinadd' => 'cn_bill_download.php',
+    'ids_sw' => 'SwHy.php'
   }.freeze
   TICK_COLUMNS = ['time', 'price', 'change', 'volume', 'amount', 'type']
   TODAY_TICK_COLUMNS = ['time', 'price', 'pchange', 'change', 'volume', 'amount', 'type']
@@ -76,9 +79,10 @@ module Tushare
   LIVE_DATA_COLS = ['name', 'open', 'pre_close', 'price', 'high', 'low', 'bid', 'ask', 'volume', 'amount',
                     'b1_v', 'b1_p', 'b2_v', 'b2_p', 'b3_v', 'b3_p', 'b4_v', 'b4_p', 'b5_v', 'b5_p',
                     'a1_v', 'a1_p', 'a2_v', 'a2_p', 'a3_v', 'a3_p', 'a4_v', 'a4_p', 'a5_v', 'a5_p', 'date', 'time', 's']
-  FOR_CLASSIFY_B_COLS = ['code','name']
-  FOR_CLASSIFY_W_COLS = ['date','code','weight']
-  THE_FIELDS = ['code','symbol','name','changepercent','trade','open','high','low','settlement','volume','turnoverratio']
+  FOR_CLASSIFY_B_COLS = %w(code name).freeze
+  FOR_CLASSIFY_W_COLS = %w(date code weight).freeze
+  THE_FIELDS = %w(code symbol name changepercent trade open high low settlement
+                  volume turnoverratio).freeze
   TICK_PRICE_URL = '%smarket.%s/%s?date=%s&symbol=%s'
   TODAY_TICKS_PAGE_URL = '%s%s/quotes_service/api/%s/CN_Transactions.getAllPageTime?date=%s&symbol=%s'
   TODAY_TICKS_URL = '%s%s/quotes_service/view/%s?symbol=%s&date=%s&page=%s'
@@ -102,17 +106,17 @@ module Tushare
   }.freeze
   SHIBOR_DATA_URL = '%s%s/shibor/web/html/%s?nameNew=Historical_%s_Data_%s.xls&downLoadPath=data&nameOld=%s%s.xls&shiborSrc=http://www.shibor.org/shibor/'.freeze
   ALL_STOCK_BASICS_FILE = '%s%s/static/all.csv' % [P_TYPE['http'], DOMAINS['oss']]
-  SINA_CONCEPTS_INDEX_URL = '%smoney.%s/q/view/%s?param=class'
-  SINA_INDUSTRY_INDEX_URL = '%s%s/q/view/%s'
-  SINA_DATA_DETAIL_URL = '%s%s/quotes_service/api/%s/Market_Center.getHQNodeData?page=1&num=400&sort=symbol&asc=1&node=%s&symbol=&_s_r_a=page'
+  SINA_CONCEPTS_INDEX_URL = '%smoney.%s/q/view/%s?param=class'.freeze
+  SINA_INDUSTRY_INDEX_URL = '%s%s/q/view/%s'.freeze
+  SINA_DATA_DETAIL_URL = '%s%s/quotes_service/api/%s/Market_Center.getHQNodeData?page=1&num=400&sort=symbol&asc=1&node=%s&symbol=&_s_r_a=page'.freeze
   INDEX_C_COMM = 'sseportal/ps/zhs/hqjt/csi'
-  HS300_CLASSIFY_URL_FTP = '%s%s/webdata/%s'
+  HS300_CLASSIFY_URL_FTP = '%s%s/webdata/%s'.freeze
   HS300_CLASSIFY_URL_HTTP = '%s%s/%s/%s'
   HIST_FQ_URL = '%s%s/corp/go.php/vMS_FuQuanMarketHistory/stockid/%s.phtml?year=%s&jidu=%s'
   HIST_INDEX_URL = '%s%s/corp/go.php/vMS_MarketHistory/stockid/%s/type/S.phtml?year=%s&jidu=%s'
   HIST_FQ_FACTOR_URL = '%s%s/api/json.php/BasicStockSrv.getStockFuQuanData?symbol=%s&type=hfq'
   INDEX_HQ_URL = '''%shq.%s/rn=xppzh&list=sh000001,sh000002,sh000003,sh000008,sh000009,sh000010,sh000011,sh000012,sh000016,sh000017,sh000300,sz399001,sz399002,sz399003,sz399004,sz399005,sz399006,sz399100,sz399101,sz399106,sz399107,sz399108,sz399333,sz399606'''
-  SSEQ_CQ_REF_URL = '%s%s/assortment/stock/list/name'
+  SSEQ_CQ_REF_URL = '%s%s/assortment/stock/list/name'.freeze
   ALL_STK_URL = '%s%s/all.csv'
   SINA_DD = '%s%s/quotes_service/view/%s?symbol=%s&num=60&page=1&sort=ticktime&asc=0&volume=%s&amount=0&type=0&day=%s'
   BOX = 'boxOffice'
@@ -159,15 +163,15 @@ module Tushare
   MAR_SZ_HZ_URL = '%s%s/szseWeb/%s?SHOWTYPE=EXCEL&ACTIONID=8&CATALOGID=1837_xxpl&txtDate=%s&tab2PAGENUM=1&ENCODE=1&TABKEY=tab1'.freeze
   MAR_SZ_MX_URL = '%s%s/szseWeb/%s?SHOWTYPE=EXCEL&ACTIONID=8&CATALOGID=1837_xxpl&txtDate=%s&tab2PAGENUM=1&ENCODE=1&TABKEY=tab2'.freeze
   MAR_SH_HZ_TAIL_URL = '&pageHelp.pageNo=%s&pageHelp.beginPage=%s&pageHelp.endPage=%s'.freeze
-  TERMINATED_URL = '%s%s/%s?jsonCallBack=jsonpCallback%s&isPagination=true&sqlId=COMMON_SSE_ZQPZ_GPLB_MCJS_ZZSSGGJBXX_L&pageHelp.pageSize=50&_=%s'
+  TERMINATED_URL = '%s%s/%s?jsonCallBack=jsonpCallback%s&isPagination=true&sqlId=COMMON_SSE_ZQPZ_GPLB_MCJS_ZZSSGGJBXX_L&pageHelp.pageSize=50&_=%s'.freeze
   SUSPENDED_URL = '%s%s/%s?jsonCallBack=jsonpCallback%s&isPagination=true&sqlId=COMMON_SSE_ZQPZ_GPLB_MCJS_ZTSSGS_L&pageHelp.pageSize=50&_=%s'
-  TERMINATED_T_COLS = ['COMPANY_CODE', 'COMPANY_ABBR', 'LISTING_DATE', 'CHANGE_DATE']
+  TERMINATED_T_COLS = %w(COMPANY_CODE COMPANY_ABBR LISTING_DATE CHANGE_DATE).freeze
   LHB_KINDS = ['ggtj', 'yytj', 'jgzz', 'jgmx']
   LHB_GGTJ_COLS = ['code', 'name', 'count', 'bamount', 'samount', 'net', 'bcount', 'scount']
   LHB_YYTJ_COLS = ['broker', 'count', 'bamount', 'bcount', 'samount', 'scount', 'top3']
   LHB_JGZZ_COLS = ['code', 'name', 'bamount', 'bcount', 'samount', 'scount', 'net']
   LHB_JGMX_COLS = ['code', 'name', 'date', 'bamount', 'samount', 'type']
-  TERMINATED_COLS = ['code', 'name', 'oDate', 'tDate']
+  TERMINATED_COLS = %w(code name oDate tDate).freeze
   DP_COLS = ['report_date', 'quarter', 'code', 'name', 'plan']
   DP_163_COLS = %w(code name year plan report_date).freeze
   XSG_COLS = %w(code name date count ratio).freeze
@@ -238,6 +242,20 @@ module Tushare
 
     def check_quarter(quarter)
       fail "quarter param: #{quarter} is wrong" unless (1..4).cover? quarter
+    end
+
+    def fetch_ftp_file(url, &block)
+      uri = URI(url)
+      local_file_path = "/tmp/#{File.basename(uri.path)}"
+      ftp = Net::FTP.new(uri.host)
+      ftp.login
+      ftp.getbinaryfile(uri.path, local_file_path)
+      return local_file_path unless block_given?
+      file = File.new(local_file_path)
+      result = yield file if block_given?
+      file.close
+      File.delete(local_file_path)
+      result
     end
   end
 end

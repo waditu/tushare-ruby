@@ -8,6 +8,7 @@ require 'tushare/stock/shibor'
 require 'tushare/stock/reference'
 require 'tushare/stock/news_event'
 require 'tushare/stock/macro'
+require 'tushare/stock/classifying'
 
 module Tushare
   # Your code goes here...
