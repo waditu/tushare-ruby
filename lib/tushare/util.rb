@@ -145,7 +145,7 @@ module Tushare
   DATE_CHK_MSG = '年度输入错误：请输入1989年以后的年份数字，格式：YYYY'
   DATE_CHK_Q_MSG = '季度输入错误：请输入1、2、3或4数字'
   TOP_PARAS_MSG = 'top有误，请输入整数或all.'
-  LHB_MSG = '周期输入有误，请输入数字5、10、30或60'
+  LHB_MSG = '周期输入有误，请输入数字5、10、30或60'.freeze
   TOKEN_F_P = 'tk.csv'
   TOKEN_ERR_MSG = '请设置通联数据接口的token凭证码'
   BOX_INPUT_ERR_MSG = '请输入YYYY-MM格式的年月数据'
@@ -153,9 +153,12 @@ module Tushare
   DP_163_URL = '%squotes.%s/data/caibao/%s?reportdate=%s&sort=declaredate&order=desc&page=%s'.freeze
   FUND_HOLDS_URL = '%squotes.%s/hs/marketdata/service/%s?host=/hs/marketdata/service/%s&page=%s&query=start:%s;end:%s&order=desc&count=60&type=query&req=%s'
   XSG_URL = '%sdatainterface.%s/EM_DataCenter/%s?type=FD&sty=BST&st=3&sr=true&fd=%s&stat=%s'.freeze
-  LHB_URL = '%sdata.%s/stock/lhb/%s.html'
-  LHB_SINA_URL = '%s%s/q/go.php/vLHBData/kind/%s/%s?last=%s&p=%s'
-  LHB_COLS = ['code', 'name', 'pchange', 'amount', 'buy', 'bratio', 'sell', 'sratio', 'reason']
+  # LHB_URL = '%sdata.%s/stock/lhb/%s.html'.freeze
+  LHB_URL = '%sdata.%s/DataCenter_V3/stock2016/TradeDetail/pagesize=200,page=1,sortRule=-1,sortType=,startDate=%s,endDate=%s,gpfw=0,js=vardata_tab_1.html'
+  LHB_SINA_URL = '%s%s/q/go.php/vLHBData/kind/%s/%s?last=%s&p=%s'.freeze
+  LHB_TMP_COLS = %w(SCode SName Chgradio ZeMoney Bmoney Smoney Ctypedes
+                    Turnover).freeze
+  LHB_COLS = %w(code name pchange amount buy sell reason Turnover).freeze
   NEW_STOCKS_URL = '%s%s/corp/view/%s?page=%s&cngem=0&orderBy=NetDate&orderType=desc'.freeze
   MAR_SH_HZ_URL = '%s%s/marketdata/tradedata/%s?jsonCallBack=jsonpCallback%s&isPagination=true&tabType=&pageHelp.pageSize=100&beginDate=%s&endDate=%s%s&_=%s'
   MAR_SH_HZ_REF_URL = '%s%s/market/dealingdata/overview/margin/'
@@ -166,11 +169,11 @@ module Tushare
   TERMINATED_URL = '%s%s/%s?jsonCallBack=jsonpCallback%s&isPagination=true&sqlId=COMMON_SSE_ZQPZ_GPLB_MCJS_ZZSSGGJBXX_L&pageHelp.pageSize=50&_=%s'.freeze
   SUSPENDED_URL = '%s%s/%s?jsonCallBack=jsonpCallback%s&isPagination=true&sqlId=COMMON_SSE_ZQPZ_GPLB_MCJS_ZTSSGS_L&pageHelp.pageSize=50&_=%s'
   TERMINATED_T_COLS = %w(COMPANY_CODE COMPANY_ABBR LISTING_DATE CHANGE_DATE).freeze
-  LHB_KINDS = ['ggtj', 'yytj', 'jgzz', 'jgmx']
-  LHB_GGTJ_COLS = ['code', 'name', 'count', 'bamount', 'samount', 'net', 'bcount', 'scount']
-  LHB_YYTJ_COLS = ['broker', 'count', 'bamount', 'bcount', 'samount', 'scount', 'top3']
-  LHB_JGZZ_COLS = ['code', 'name', 'bamount', 'bcount', 'samount', 'scount', 'net']
-  LHB_JGMX_COLS = ['code', 'name', 'date', 'bamount', 'samount', 'type']
+  LHB_KINDS = %w(ggtj yytj jgzz jgmx).freeze
+  LHB_GGTJ_COLS = %w(code name count bamount samount net bcount scount).freeze
+  LHB_YYTJ_COLS = %w(broker count bamount bcount samount scount top3).freeze
+  LHB_JGZZ_COLS = %w(code name bamount bcount samount scount net).freeze
+  LHB_JGMX_COLS = %w(code name date bamount samount type).freeze
   TERMINATED_COLS = %w(code name oDate tDate).freeze
   DP_COLS = ['report_date', 'quarter', 'code', 'name', 'plan']
   DP_163_COLS = %w(code name year plan report_date).freeze
