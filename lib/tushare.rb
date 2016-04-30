@@ -11,6 +11,7 @@ require 'tushare/stock/macro'
 require 'tushare/stock/classifying'
 require 'tushare/stock/billboard'
 require 'tushare/internet/box_office'
+require 'tushare/datayes'
 
 module Tushare
   # Your code goes here...
