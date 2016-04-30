@@ -120,10 +120,10 @@ module Tushare
   ALL_STK_URL = '%s%s/all.csv'
   SINA_DD = '%s%s/quotes_service/view/%s?symbol=%s&num=60&page=1&sort=ticktime&asc=0&volume=%s&amount=0&type=0&day=%s'
   BOX = 'boxOffice'
-  MOVIE_BOX = '%s%s/%s/GetHourBoxOffice?d=%s'
-  BOXOFFICE_DAY = '%s%s/%s/GetDayBoxOffice?num=%s&d=%s'
-  BOXOFFICE_MONTH = '%s%s/%s/getMonthBox?sdate=%s'
-  BOXOFFICE_CBD = '%s%s/%s/getCBD?pIndex=%s&dt=%s'
+  MOVIE_BOX = '%s%s/%s/GetHourBoxOffice?d=%s'.freeze
+  BOXOFFICE_DAY = '%s%s/%s/GetDayBoxOffice?num=%s&d=%s'.freeze
+  BOXOFFICE_MONTH = '%s%s/%s/getMonthBox?sdate=%s'.freeze
+  BOXOFFICE_CBD = '%s%s/%s/getCBD?pIndex=%s&dt=%s'.freeze
   SHIBOR_COLS = %w(date ON 1W 2W 1M 3M 6M 9M 1Y).freeze
   QUOTE_COLS = %w(date bank ON_B ON_A 1W_B 1W_A 2W_B 2W_A 1M_B 1M_A
                   3M_B 3M_A 6M_B 6M_A 9M_B 9M_A 1Y_B 1Y_A).freeze
@@ -148,7 +148,7 @@ module Tushare
   LHB_MSG = '周期输入有误，请输入数字5、10、30或60'.freeze
   TOKEN_F_P = 'tk.csv'
   TOKEN_ERR_MSG = '请设置通联数据接口的token凭证码'
-  BOX_INPUT_ERR_MSG = '请输入YYYY-MM格式的年月数据'
+  BOX_INPUT_ERR_MSG = '请输入YYYY-MM格式的年月数据'.freeze
   DP_URL = '%sapp.finance.%s/data/stock/%s?day=&page=%s'
   DP_163_URL = '%squotes.%s/data/caibao/%s?reportdate=%s&sort=declaredate&order=desc&page=%s'.freeze
   FUND_HOLDS_URL = '%squotes.%s/hs/marketdata/service/%s?host=/hs/marketdata/service/%s&page=%s&query=start:%s;end:%s&order=desc&count=60&type=query&req=%s'
