@@ -5,13 +5,13 @@ module Tushare
     HTTPS_URL = 'api.wmcloud.com'.freeze
     HTTPS_PORT = 443
     SUCCESS_CODE = 1
-    BOND = '/api/bond/getBond.json?secID=%s&ticker=%s&field=%s'
-    BONDCF = '/api/bond/getBondCf.json?secID=%s&ticker=%s&beginDate=%s&cashTypeCD=%s&endDate=%s&field=%s'
-    BONDCOUPON = '/api/bond/getBondCoupon.json?secID=%s&ticker=%s&field=%s'
-    BONDGUAR = '/api/bond/getBondGuar.json?secID=%s&ticker=%s&guarModeCD=%s&field=%s'
-    BONDISSUE = '/api/bond/getBondIssue.json?secID=%s&ticker=%s&raiseModeCD=%s&field=%s'
-    BONDOPTION = '/api/bond/getBondOption.json?secID=%s&ticker=%s&field=%s'
-    BONDRATING = '/api/bond/getBondRating.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'
+    BOND = '/api/bond/getBond.json?secID=%s&ticker=%s&field=%s'.freeze
+    BONDCF = '/api/bond/getBondCf.json?secID=%s&ticker=%s&beginDate=%s&cashTypeCD=%s&endDate=%s&field=%s'.freeze
+    BONDCOUPON = '/api/bond/getBondCoupon.json?secID=%s&ticker=%s&field=%s'.freeze
+    BONDGUAR = '/api/bond/getBondGuar.json?secID=%s&ticker=%s&guarModeCD=%s&field=%s'.freeze
+    BONDISSUE = '/api/bond/getBondIssue.json?secID=%s&ticker=%s&raiseModeCD=%s&field=%s'.freeze
+    BONDOPTION = '/api/bond/getBondOption.json?secID=%s&ticker=%s&field=%s'.freeze
+    BONDRATING = '/api/bond/getBondRating.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'.freeze
     EQU = '/api/equity/getEqu.json?equTypeCD=%s&secID=%s&ticker=%s&listStatusCD=%s&field=%s'
     EQUALLOT = '/api/equity/getEquAllot.json?isAllotment=%s&secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'
     EQUDIV = '/api/equity/getEquDiv.json?eventProcessCD=%s&exDivDate=%s&secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'
@@ -22,10 +22,10 @@ module Tushare
     EQUSPLITS = '/api/equity/getEquSplits.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'
     FUTU = '/api/future/getFutu.json?exchangeCD=%s&secID=%s&ticker=%s&contractObject=%s&field=%s'
     FUTUCONVF = '/api/future/getFutuConvf.json?secID=%s&ticker=%s&field=%s'
-    GUARRATING = '/api/bond/getGuarRating.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'
+    GUARRATING = '/api/bond/getGuarRating.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'.freeze
     IDX = '/api/idx/getIdx.json?secID=%s&ticker=%s&field=%s'
     IDXCONS = '/api/idx/getIdxCons.json?secID=%s&ticker=%s&intoDate=%s&intoDate=%s&isNew=%s&field=%s'
-    ISSUERRATING = '/api/bond/getIssuerRating.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'
+    ISSUERRATING = '/api/bond/getIssuerRating.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'.freeze
     MKTEQUD = '/api/market/getMktEqud.json?secID=%s&ticker=%s&tradeDate=%s&beginDate=%s&endDate=%s&field=%s'
     MKTFUTD = '/api/market/getMktFutd.json?secID=%s&ticker=%s&tradeDate=%s&beginDate=%s&endDate=%s&field=%s'
     MKTIDXD = '/api/market/getMktIdxd.json?indexID=%s&ticker=%s&tradeDate=%s&beginDate=%s&endDate=%s&field=%s'
@@ -63,7 +63,7 @@ module Tushare
     MKTREPOD = '/api/market/getMktRepod.json?secID=%s&ticker=%s&tradeDate=%s&beginDate=%s&endDate=%s&field=%s'
     MKTBONDD = '/api/market/getMktBondd.json?secID=%s&ticker=%s&tradeDate=%s&beginDate=%s&endDate=%s&field=%s'
     EQUSHARE = '/api/equity/getEquShare.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&partyID=%s&field=%s'
-    REPO = '/api/bond/getRepo.json?secID=%s&ticker=%s&field=%s'
+    REPO = '/api/bond/getRepo.json?secID=%s&ticker=%s&field=%s'.freeze
     MKTHKEQUD = '/api/market/getMktHKEqud.json?secID=%s&ticker=%s&tradeDate=%s&beginDate=%s&endDate=%s&field=%s'
     TICKRTSNAPSHOT = '/api/market/getTickRTSnapshot.json?securityID=%s&field=%s'
     TICKRTSNAPSHOTINDEX = '/api/market/getTickRTSnapshotIndex.json?securityID=%s&field=%s'
