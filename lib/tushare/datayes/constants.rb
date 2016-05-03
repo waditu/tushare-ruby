@@ -12,14 +12,14 @@ module Tushare
     BONDISSUE = '/api/bond/getBondIssue.json?secID=%s&ticker=%s&raiseModeCD=%s&field=%s'.freeze
     BONDOPTION = '/api/bond/getBondOption.json?secID=%s&ticker=%s&field=%s'.freeze
     BONDRATING = '/api/bond/getBondRating.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'.freeze
-    EQU = '/api/equity/getEqu.json?equTypeCD=%s&secID=%s&ticker=%s&listStatusCD=%s&field=%s'
-    EQUALLOT = '/api/equity/getEquAllot.json?isAllotment=%s&secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'
-    EQUDIV = '/api/equity/getEquDiv.json?eventProcessCD=%s&exDivDate=%s&secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'
-    EQUINDUSTRY = '/api/equity/getEquIndustry.json?industry=%s&industryID=%s&industryVersionCD=%s&secID=%s&ticker=%s&intoDate=%s&field=%s'
-    EQUIPO = '/api/equity/getEquIPO.json?eventProcessCD=%s&secID=%s&ticker=%s&field=%s'
-    EQUREF = '/api/equity/getEquRef.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&eventProcessCD=%s&field=%s'
-    EQURETUD = '/api/equity/getEquRetud.json?listStatusCD=%s&secID=%s&ticker=%s&beginDate=%s&dailyReturnNoReinvLower=%s&dailyReturnNoReinvUpper=%s&dailyReturnReinvLower=%s&dailyReturnReinvUpper=%s&endDate=%s&isChgPctl=%s&field=%s'
-    EQUSPLITS = '/api/equity/getEquSplits.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'
+    EQU = '/api/equity/getEqu.json?equTypeCD=%s&secID=%s&ticker=%s&listStatusCD=%s&field=%s'.freeze
+    EQUALLOT = '/api/equity/getEquAllot.json?isAllotment=%s&secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'.freeze
+    EQUDIV = '/api/equity/getEquDiv.json?eventProcessCD=%s&exDivDate=%s&secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'.freeze
+    EQUINDUSTRY = '/api/equity/getEquIndustry.json?industry=%s&industryID=%s&industryVersionCD=%s&secID=%s&ticker=%s&intoDate=%s&field=%s'.freeze
+    EQUIPO = '/api/equity/getEquIPO.json?eventProcessCD=%s&secID=%s&ticker=%s&field=%s'.freeze
+    EQUREF = '/api/equity/getEquRef.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&eventProcessCD=%s&field=%s'.freeze
+    EQURETUD = '/api/equity/getEquRetud.json?listStatusCD=%s&secID=%s&ticker=%s&beginDate=%s&dailyReturnNoReinvLower=%s&dailyReturnNoReinvUpper=%s&dailyReturnReinvLower=%s&dailyReturnReinvUpper=%s&endDate=%s&isChgPctl=%s&field=%s'.freeze
+    EQUSPLITS = '/api/equity/getEquSplits.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'.freeze
     FUTU = '/api/future/getFutu.json?exchangeCD=%s&secID=%s&ticker=%s&contractObject=%s&field=%s'
     FUTUCONVF = '/api/future/getFutuConvf.json?secID=%s&ticker=%s&field=%s'
     GUARRATING = '/api/bond/getGuarRating.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'.freeze
@@ -55,14 +55,14 @@ module Tushare
     FDMTEF = '/api/fundamental/getFdmtEf.json?reportType=%s&secID=%s&ticker=%s&beginDate=%s&endDate=%s&forecastType=%s&publishDateBegin=%s&publishDateEnd=%s&field=%s'
     TRADECAL = '/api/master/getTradeCal.json?exchangeCD=%s&beginDate=%s&endDate=%s&field=%s'.freeze
     INDUSTRY = '/api/master/getIndustry.json?industryVersion=%s&industryVersionCD=%s&industryLevel=%s&isNew=%s&field=%s'.freeze
-    FSTTOTAL = '/api/equity/getFstTotal.json?beginDate=%s&endDate=%s&exchangeCD=%s&field=%s'
-    FSTDETAIL = '/api/equity/getFstDetail.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'
+    FSTTOTAL = '/api/equity/getFstTotal.json?beginDate=%s&endDate=%s&exchangeCD=%s&field=%s'.freeze
+    FSTDETAIL = '/api/equity/getFstDetail.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'.freeze
     MKTBLOCKD = '/api/market/getMktBlockd.json?secID=%s&ticker=%s&tradeDate=%s&assetClass=%s&beginDate=%s&endDate=%s&field=%s'
     HKEQU = '/api/HKequity/getHKEqu.json?listStatusCD=%s&secID=%s&ticker=%s&field=%s'
     HKEQUCA = '/api/HKequity/getHKEquCA.json?secID=%s&ticker=%s&eventTypeCD=%s&field=%s'
     MKTREPOD = '/api/market/getMktRepod.json?secID=%s&ticker=%s&tradeDate=%s&beginDate=%s&endDate=%s&field=%s'
     MKTBONDD = '/api/market/getMktBondd.json?secID=%s&ticker=%s&tradeDate=%s&beginDate=%s&endDate=%s&field=%s'
-    EQUSHARE = '/api/equity/getEquShare.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&partyID=%s&field=%s'
+    EQUSHARE = '/api/equity/getEquShare.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&partyID=%s&field=%s'.freeze
     REPO = '/api/bond/getRepo.json?secID=%s&ticker=%s&field=%s'.freeze
     MKTHKEQUD = '/api/market/getMktHKEqud.json?secID=%s&ticker=%s&tradeDate=%s&beginDate=%s&endDate=%s&field=%s'
     TICKRTSNAPSHOT = '/api/market/getTickRTSnapshot.json?securityID=%s&field=%s'
@@ -586,7 +586,7 @@ module Tushare
     THEMESBYNEWSTIME2 = '/api/subject/getThemesByNewsTime2.json?publishBeginTime=%s&publishEndTime=%s&field=%s'
     SYSCODE = '/api/master/getSysCode.json?codeTypeID=%s&valueCD=%s&field=%s'.freeze
     FUNDLEVERAGEINFO = '/api/fund/getFundLeverageInfo.json?exchangeCDLeverage=%s&secID=%s&ticker=%s&field=%s'
-    SECST = '/api/equity/getSecST.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'
+    SECST = '/api/equity/getSecST.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'.freeze
     DERIV = '/api/IV/getDerIv.json?beginDate=%s&endDate=%s&optID=%s&SecID=%s&field=%s'
     DERIVHV = '/api/IV/getDerIvHv.json?beginDate=%s&endDate=%s&SecID=%s&period=%s&field=%s'
     DERIVINDEX = '/api/IV/getDerIvIndex.json?beginDate=%s&endDate=%s&SecID=%s&period=%s&field=%s'
