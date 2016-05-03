@@ -53,8 +53,8 @@ module Tushare
     FDMTISINSU = '/api/fundamental/getFdmtISInsu.json?reportType=%s&secID=%s&ticker=%s&beginDate=%s&endDate=%s&publishDateBegin=%s&publishDateEnd=%s&field=%s'
     FDMTEE = '/api/fundamental/getFdmtEe.json?reportType=%s&secID=%s&ticker=%s&beginDate=%s&endDate=%s&publishDateBegin=%s&publishDateEnd=%s&field=%s'
     FDMTEF = '/api/fundamental/getFdmtEf.json?reportType=%s&secID=%s&ticker=%s&beginDate=%s&endDate=%s&forecastType=%s&publishDateBegin=%s&publishDateEnd=%s&field=%s'
-    TRADECAL = '/api/master/getTradeCal.json?exchangeCD=%s&beginDate=%s&endDate=%s&field=%s'
-    INDUSTRY = '/api/master/getIndustry.json?industryVersion=%s&industryVersionCD=%s&industryLevel=%s&isNew=%s&field=%s'
+    TRADECAL = '/api/master/getTradeCal.json?exchangeCD=%s&beginDate=%s&endDate=%s&field=%s'.freeze
+    INDUSTRY = '/api/master/getIndustry.json?industryVersion=%s&industryVersionCD=%s&industryLevel=%s&isNew=%s&field=%s'.freeze
     FSTTOTAL = '/api/equity/getFstTotal.json?beginDate=%s&endDate=%s&exchangeCD=%s&field=%s'
     FSTDETAIL = '/api/equity/getFstDetail.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'
     MKTBLOCKD = '/api/market/getMktBlockd.json?secID=%s&ticker=%s&tradeDate=%s&assetClass=%s&beginDate=%s&endDate=%s&field=%s'
@@ -497,7 +497,7 @@ module Tushare
     FDMTISLATELY = '/api/fundamental/getFdmtISLately.json?field=%s'
     NEWSHEATINDEX = '/api/subject/getNewsHeatIndex.json?beginDate=%s&endDate=%s&exchangeCD=%s&secID=%s&secShortName=%s&ticker=%s&field=%s'
     NEWSSENTIMENTINDEX = '/api/subject/getNewsSentimentIndex.json?beginDate=%s&endDate=%s&exchangeCD=%s&secID=%s&secShortName=%s&ticker=%s&field=%s'
-    SECTYPEREL = '/api/master/getSecTypeRel.json?secID=%s&ticker=%s&typeID=%s&field=%s'
+    SECTYPEREL = '/api/master/getSecTypeRel.json?secID=%s&ticker=%s&typeID=%s&field=%s'.freeze
     REPORTBYTICKER = '/api/subject/getReportByTicker.json?ticker=%s&beginDate=%s&endDate=%s&field=%s'
     REPORTBYCATEGORY = '/api/subject/getReportByCategory.json?beginDate=%s&Category=%s&endDate=%s&field=%s'
     REPORTCONTENT = '/api/subject/getReportContent.json?ticker=%s&beginDate=%s&endDate=%s&field=%s'
@@ -532,7 +532,7 @@ module Tushare
     ECOMMERCEDATATSINGTAO = '/api/macro/getEcommerceDataTsingTao.json?indicID=%s&indicName=%s&beginDate=%s&endDate=%s&field=%s'
     ACTIVETHEMESINSERT = '/api/subject/getActiveThemesInsert.json?beginDate=%s&endDate=%s&isLatest=%s&themeSource=%s&field=%s'
     ACTIVETHEMESDELETE = '/api/subject/getActiveThemesDelete.json?beginDate=%s&endDate=%s&isLatest=%s&themeSource=%s&field=%s'
-    EQUINFO = '/api/master/getEquInfo.json?ticker=%s&field=%s'
+    EQUINFO = '/api/master/getEquInfo.json?ticker=%s&field=%s'.freeze
     SECTIPS = '/api/market/getSecTips.json?tipsTypeCD=%s&field=%s'
     THEMESCLUSTER = '/api/subject/getThemesCluster.json?isMain=%s&themeID=%s&themeName=%s&field=%s'
     THEMESBYNEWS = '/api/subject/getThemesByNews.json?insertDate=%s&insertDate=%s&newsID=%s&beginTime=%s&endTime=%s&field=%s'
@@ -570,9 +570,9 @@ module Tushare
     INDUSTRYTICKRTSNAPSHOT = '/api/market/getIndustryTickRTSnapshot.json?securityID=%s&field=%s'
     NEWSINFOBYINSERTTIME = '/api/subject/getNewsInfoByInsertTime.json?newsInsertDate=%s&beginTime=%s&endTime=%s&field=%s'
     NEWSCONTENTBYINSERTTIME = '/api/subject/getNewsContentByInsertTime.json?newsInsertDate=%s&beginTime=%s&endTime=%s&field=%s'
-    SECTYPEREGIONREL = '/api/master/getSecTypeRegionRel.json?secID=%s&ticker=%s&typeID=%s&field=%s'
-    SECTYPE = '/api/master/getSecType.json?field=%s'
-    SECTYPEREGION = '/api/master/getSecTypeRegion.json?field=%s'
+    SECTYPEREGIONREL = '/api/master/getSecTypeRegionRel.json?secID=%s&ticker=%s&typeID=%s&field=%s'.freeze
+    SECTYPE = '/api/master/getSecType.json?field=%s'.freeze
+    SECTYPEREGION = '/api/master/getSecTypeRegion.json?field=%s'.freeze
     SOCIALDATAGUBA = '/api/subject/getSocialDataGuba.json?beginDate=%s&endDate=%s&ticker=%s&field=%s'
     SOCIALTHEMEDATAGUBA = '/api/subject/getSocialThemeDataGuba.json?beginDate=%s&endDate=%s&themeID=%s&field=%s'
     FUNDSHARESCHG = '/api/fund/getFundSharesChg.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'
@@ -584,7 +584,7 @@ module Tushare
     REPORTCONTENTBYID = '/api/subject/getReportContentByID.json?reportID=%s&field=%s'
     THEMESBYNEWS2 = '/api/subject/getThemesByNews2.json?insertBeginTime=%s&insertEndTime=%s&newsID=%s&field=%s'
     THEMESBYNEWSTIME2 = '/api/subject/getThemesByNewsTime2.json?publishBeginTime=%s&publishEndTime=%s&field=%s'
-    SYSCODE = '/api/master/getSysCode.json?codeTypeID=%s&valueCD=%s&field=%s'
+    SYSCODE = '/api/master/getSysCode.json?codeTypeID=%s&valueCD=%s&field=%s'.freeze
     FUNDLEVERAGEINFO = '/api/fund/getFundLeverageInfo.json?exchangeCDLeverage=%s&secID=%s&ticker=%s&field=%s'
     SECST = '/api/equity/getSecST.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'
     DERIV = '/api/IV/getDerIv.json?beginDate=%s&endDate=%s&optID=%s&SecID=%s&field=%s'
