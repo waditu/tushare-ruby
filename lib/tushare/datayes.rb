@@ -1,10 +1,12 @@
 require 'tushare/datayes/constants'
 require 'tushare/datayes/master'
+require 'tushare/datayes/bond'
 
 module Tushare
   # Datayes module for 通联数据
   module Datayes
     extend Master
+    extend Bond
 
     def token
       @@token ||= ''
