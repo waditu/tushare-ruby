@@ -6,11 +6,12 @@ describe Tushare::Datayes do
   end
 
   it 'can get sec id data' do
-    tp @datayes.sec_id(nil, nil, nil, '000001')
+    tp @datayes.sec_id(ticker: '000001')
   end
 
   it 'can get trade_cal data' do
-    tp @datayes.trade_cal('XSHG', '20160401', '20160501')
+    tp @datayes.trade_cal(exchange_cd: 'XSHG', begin_date: '20160401',
+                          end_date: '20160501')
   end
 
   # it 'can get industry data' do
@@ -18,15 +19,15 @@ describe Tushare::Datayes do
   # end
 
   it 'can get sec_type_rel data' do
-    tp @datayes.sec_type_rel(nil, '000001')
+    tp @datayes.sec_type_rel(ticker: '000001')
   end
 
   it 'can get equ_info data' do
-    tp @datayes.equ_info('000001')
+    tp @datayes.equ_info(ticker: '000001')
   end
 
   it 'can get sec_type_region_rel data' do
-    tp @datayes.sec_type_region_rel nil, '000001'
+    tp @datayes.sec_type_region_rel ticker: '000001'
   end
 
   it 'can get sec_type data' do

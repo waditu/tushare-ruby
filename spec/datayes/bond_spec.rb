@@ -6,42 +6,42 @@ describe Tushare::Datayes do
   end
 
   it 'can get bond data' do
-    tp @datayes.bond(nil, '000001')
+    tp @datayes.bond(ticker: '000001')
   end
 
   it 'can get bond_cf data' do
-    tp @datayes.bond_cf(nil, '000001')
+    tp @datayes.bond_cf(ticker: '000001')
   end
 
   it 'can get bond_coupon data' do
-    tp @datayes.bond_coupon(nil, '000001')
+    tp @datayes.bond_coupon(ticker: '000001')
   end
 
   it 'can get bond_guar data' do
-    tp @datayes.bond_guar(nil, '038001')
+    tp @datayes.bond_guar(ticker: '038001')
   end
 
   it 'can get bond_issue data' do
-    tp @datayes.bond_issue(nil, '000001')
+    tp @datayes.bond_issue(ticker: '000001')
   end
 
   it 'can get bond_option data' do
-    tp @datayes.bond_option(nil, '125002')
+    tp @datayes.bond_option(ticker: '125002')
   end
 
   it 'can get bond_rating data' do
-    tp @datayes.bond_rating(nil, '125069')
+    tp @datayes.bond_rating(ticker: '125069')
   end
 
   it 'can get guar_rating data' do
-    tp @datayes.guar_rating(nil, '088052')
+    tp @datayes.guar_rating(ticker: '088052')
   end
 
   it 'can get issuer_rating data' do
-    tp @datayes.issuer_rating(nil, '050302')
+    tp @datayes.issuer_rating(ticker: '050302')
   end
 
   it 'can get repo data' do
-    tp @datayes.repo(nil, '131800')
+    tp @datayes.repo(ticker: '131800')
   end
 end
