@@ -4,6 +4,13 @@ require 'tushare/datayes/bond'
 require 'tushare/datayes/equity'
 require 'tushare/datayes/fund'
 require 'tushare/datayes/fundamental'
+require 'tushare/datayes/future'
+require 'tushare/datayes/hk_equity'
+require 'tushare/datayes/idx'
+require 'tushare/datayes/iv'
+require 'tushare/datayes/macro'
+require 'tushare/datayes/market'
+require 'tushare/datayes/options'
 
 module Tushare
   # Datayes module for 通联数据
@@ -13,6 +20,13 @@ module Tushare
     extend Equity
     extend Fund
     extend Fundamental
+    extend Future
+    extend HKEquity
+    extend Idx
+    extend IV
+    extend Macro
+    extend Market
+    extend Options
 
     def token
       @@token ||= ''
