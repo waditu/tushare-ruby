@@ -3,6 +3,7 @@ require 'tushare/datayes/master'
 require 'tushare/datayes/bond'
 require 'tushare/datayes/equity'
 require 'tushare/datayes/fund'
+require 'tushare/datayes/fundamental'
 
 module Tushare
   # Datayes module for 通联数据
@@ -11,6 +12,7 @@ module Tushare
     extend Bond
     extend Equity
     extend Fund
+    extend Fundamental
 
     def token
       @@token ||= ''
