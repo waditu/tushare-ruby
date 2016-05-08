@@ -535,7 +535,7 @@ module Tushare
     EQUINFO = '/api/master/getEquInfo.json?ticker=%s&field=%s'.freeze
     SECTIPS = '/api/market/getSecTips.json?tipsTypeCD=%s&field=%s'.freeze
     THEMESCLUSTER = '/api/subject/getThemesCluster.json?isMain=%s&themeID=%s&themeName=%s&field=%s'.freeze
-    THEMESBYNEWS = '/api/subject/getThemesByNews.json?insertDate=%s&insertDate=%s&newsID=%s&beginTime=%s&endTime=%s&field=%s'.freeze
+    THEMESBYNEWS = '/api/subject/getThemesByNews.json?insertDate=%s&newsID=%s&beginTime=%s&endTime=%s&field=%s'.freeze
     BARRTINTRADAYONEMINUTE = '/api/market/getBarRTIntraDayOneMinute.json?time=%s&field=%s'.freeze
     EQURTRANK = '/api/market/getEquRTRank.json?desc=%s&exchangeCD=%s&field=%s'.freeze
     ECOMMERCEDATAGUJING = '/api/macro/getEcommerceDataGujing.json?indicID=%s&indicName=%s&beginDate=%s&endDate=%s&field=%s'.freeze
@@ -563,10 +563,10 @@ module Tushare
     ECOMMERCEDATASOLAREAST = '/api/macro/getEcommerceDataSolareast.json?indicID=%s&indicName=%s&beginDate=%s&endDate=%s&field=%s'.freeze
     ECOMMERCEDATACHIGO = '/api/macro/getEcommerceDataChigo.json?indicID=%s&indicName=%s&beginDate=%s&endDate=%s&field=%s'.freeze
     ECOMMERCEDATAAUCMA = '/api/macro/getEcommerceDataAucma.json?indicID=%s&indicName=%s&beginDate=%s&endDate=%s&field=%s'.freeze
-    THEMESBYNEWSCOMPANYREL = '/api/subject/getThemesByNewsCompanyRel.json?insertDate=%s&insertDate=%s&newsID=%s&beginTime=%s&endTime=%s&field=%s'.freeze
+    THEMESBYNEWSCOMPANYREL = '/api/subject/getThemesByNewsCompanyRel.json?insertDate=%s&newsID=%s&beginTime=%s&endTime=%s&field=%s'.freeze
     THEMESINSERTDB = '/api/subject/getThemesInsertDB.json?beginDate=%s&endDate=%s&themeSource=%s&field=%s'.freeze
-    THEMESBYNEWSLF = '/api/subject/getThemesByNewsLF.json?insertDate=%s&insertDate=%s&newsID=%s&beginTime=%s&endTime=%s&field=%s'.freeze
-    THEMESBYNEWSMF = '/api/subject/getThemesByNewsMF.json?insertDate=%s&insertDate=%s&newsID=%s&beginTime=%s&endTime=%s&field=%s'.freeze
+    THEMESBYNEWSLF = '/api/subject/getThemesByNewsLF.json?insertDate=%s&newsID=%s&beginTime=%s&endTime=%s&field=%s'.freeze
+    THEMESBYNEWSMF = '/api/subject/getThemesByNewsMF.json?insertDate=%s&newsID=%s&beginTime=%s&endTime=%s&field=%s'.freeze
     INDUSTRYTICKRTSNAPSHOT = '/api/market/getIndustryTickRTSnapshot.json?securityID=%s&field=%s'.freeze
     NEWSINFOBYINSERTTIME = '/api/subject/getNewsInfoByInsertTime.json?newsInsertDate=%s&beginTime=%s&endTime=%s&field=%s'.freeze
     NEWSCONTENTBYINSERTTIME = '/api/subject/getNewsContentByInsertTime.json?newsInsertDate=%s&beginTime=%s&endTime=%s&field=%s'.freeze

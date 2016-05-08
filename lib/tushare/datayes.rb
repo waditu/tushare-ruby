@@ -11,6 +11,7 @@ require 'tushare/datayes/iv'
 require 'tushare/datayes/macro'
 require 'tushare/datayes/market'
 require 'tushare/datayes/options'
+require 'tushare/datayes/subject'
 
 module Tushare
   # Datayes module for 通联数据
@@ -27,6 +28,7 @@ module Tushare
     extend Macro
     extend Market
     extend Options
+    extend Subject
 
     def token
       @@token ||= ''
