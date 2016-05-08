@@ -24,7 +24,7 @@ module Tushare
     FUTUCONVF = '/api/future/getFutuConvf.json?secID=%s&ticker=%s&field=%s'.freeze
     GUARRATING = '/api/bond/getGuarRating.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'.freeze
     IDX = '/api/idx/getIdx.json?secID=%s&ticker=%s&field=%s'.freeze
-    IDXCONS = '/api/idx/getIdxCons.json?secID=%s&ticker=%s&intoDate=%s&intoDate=%s&isNew=%s&field=%s'.freeze
+    IDXCONS = '/api/idx/getIdxCons.json?secID=%s&ticker=%s&intoDate=%s&isNew=%s&field=%s'.freeze
     ISSUERRATING = '/api/bond/getIssuerRating.json?secID=%s&ticker=%s&beginDate=%s&endDate=%s&field=%s'.freeze
     MKTEQUD = '/api/market/getMktEqud.json?secID=%s&ticker=%s&tradeDate=%s&beginDate=%s&endDate=%s&field=%s'.freeze
     MKTFUTD = '/api/market/getMktFutd.json?secID=%s&ticker=%s&tradeDate=%s&beginDate=%s&endDate=%s&field=%s'.freeze
