@@ -4,9 +4,17 @@ module Tushare
   K_LABELS = ['D', 'W', 'M']
   K_MIN_LABELS = ['5', '15', '30', '60']
   K_TYPE = {'D'=> 'akdaily', 'W'=> 'akweekly', 'M'=> 'akmonthly'}
-  INDEX_LABELS = ['sh', 'sz', 'hs300', 'sz50', 'cyb', 'zxb', 'zx300', 'zh500']
-  INDEX_LIST = {'sh'=> 'sh000001', 'sz'=> 'sz399001', 'hs300'=> 'sz399300',
-                'sz50'=> 'sh000016', 'zxb'=> 'sz399005', 'cyb'=> 'sz399006', 'zx300'=> 'sz399008', 'zh500'=>'sh000905'}
+  INDEX_LABELS = %w(sh sz hs300 sz50 cyb zxb zx300 zh500).freeze
+  INDEX_LIST = {
+    'sh' => 'sh000001',
+    'sz' => 'sz399001',
+    'hs300' => 'sz399300',
+    'sz50' => 'sh000016',
+    'zxb' => 'sz399005',
+    'cyb' => 'sz399006',
+    'zx300' => 'sz399008',
+    'zh500' => 'sh000905'
+  }.freeze
   P_TYPE = {
     'http' => 'http://',
     'ftp' => 'ftp://'
@@ -76,9 +84,10 @@ module Tushare
                        'ma5', 'ma10', 'ma20', 'v_ma5', 'v_ma10', 'v_ma20', 'turnover']
   INX_DAY_PRICE_COLUMNS = ['date', 'open', 'high', 'close', 'low', 'volume', 'price_change', 'p_change',
                            'ma5', 'ma10', 'ma20', 'v_ma5', 'v_ma10', 'v_ma20']
-  LIVE_DATA_COLS = ['name', 'open', 'pre_close', 'price', 'high', 'low', 'bid', 'ask', 'volume', 'amount',
-                    'b1_v', 'b1_p', 'b2_v', 'b2_p', 'b3_v', 'b3_p', 'b4_v', 'b4_p', 'b5_v', 'b5_p',
-                    'a1_v', 'a1_p', 'a2_v', 'a2_p', 'a3_v', 'a3_p', 'a4_v', 'a4_p', 'a5_v', 'a5_p', 'date', 'time', 's']
+  LIVE_DATA_COLS = %w(name open pre_close price high low bid ask volume amount
+                      b1_v b1_p b2_v b2_p b3_v b3_p b4_v b4_p b5_v b5_p
+                      a1_v a1_p a2_v a2_p a3_v a3_p a4_v a4_p a5_v a5_p date
+                      time s).freeze
   FOR_CLASSIFY_B_COLS = %w(code name).freeze
   FOR_CLASSIFY_W_COLS = %w(date code weight).freeze
   THE_FIELDS = %w(code symbol name changepercent trade open high low settlement
@@ -87,7 +96,7 @@ module Tushare
   TODAY_TICKS_PAGE_URL = '%s%s/quotes_service/api/%s/CN_Transactions.getAllPageTime?date=%s&symbol=%s'
   TODAY_TICKS_URL = '%s%s/quotes_service/view/%s?symbol=%s&date=%s&page=%s'
   DAY_PRICE_URL = '%sapi.finance.%s/%s/?code=%s&type=last'
-  LIVE_DATA_URL = '%shq.%s/rn=%s&list=%s'
+  LIVE_DATA_URL = '%shq.%s/rn=%s&list=%s'.freeze
   DAY_PRICE_MIN_URL = '%sapi.finance.%s/akmin?scode=%s&type=%s'
   SINA_DAY_PRICE_URL = '%s%s/quotes_service/api/%s/Market_Center.getHQNodeData?num=80&sort=changepercent&asc=0&node=hs_a&symbol=&_s_r_a=page&page=%s'
   REPORT_URL = '%s%s/q/go.php/vFinanceAnalyze/kind/mainindex/%s?s_i=&s_a=&s_c=&reportdate=%s&quarter=%s&p=%s&num=%s'
@@ -112,10 +121,10 @@ module Tushare
   INDEX_C_COMM = 'sseportal/ps/zhs/hqjt/csi'
   HS300_CLASSIFY_URL_FTP = '%s%s/webdata/%s'.freeze
   HS300_CLASSIFY_URL_HTTP = '%s%s/%s/%s'
-  HIST_FQ_URL = '%s%s/corp/go.php/vMS_FuQuanMarketHistory/stockid/%s.phtml?year=%s&jidu=%s'
-  HIST_INDEX_URL = '%s%s/corp/go.php/vMS_MarketHistory/stockid/%s/type/S.phtml?year=%s&jidu=%s'
-  HIST_FQ_FACTOR_URL = '%s%s/api/json.php/BasicStockSrv.getStockFuQuanData?symbol=%s&type=hfq'
-  INDEX_HQ_URL = '''%shq.%s/rn=xppzh&list=sh000001,sh000002,sh000003,sh000008,sh000009,sh000010,sh000011,sh000012,sh000016,sh000017,sh000300,sz399001,sz399002,sz399003,sz399004,sz399005,sz399006,sz399100,sz399101,sz399106,sz399107,sz399108,sz399333,sz399606'''
+  HIST_FQ_URL = '%s%s/corp/go.php/vMS_FuQuanMarketHistory/stockid/%s.phtml?year=%s&jidu=%s'.freeze
+  HIST_INDEX_URL = '%s%s/corp/go.php/vMS_MarketHistory/stockid/%s/type/S.phtml?year=%s&jidu=%s'.freeze
+  HIST_FQ_FACTOR_URL = '%s%s/api/json.php/BasicStockSrv.getStockFuQuanData?symbol=%s&type=hfq'.freeze
+  INDEX_HQ_URL = '''%shq.%s/rn=xppzh&list=sh000001,sh000002,sh000003,sh000008,sh000009,sh000010,sh000011,sh000012,sh000016,sh000017,sh000300,sz399001,sz399002,sz399003,sz399004,sz399005,sz399006,sz399100,sz399101,sz399106,sz399107,sz399108,sz399333,sz399606'''.freeze
   SSEQ_CQ_REF_URL = '%s%s/assortment/stock/list/name'.freeze
   ALL_STK_URL = '%s%s/all.csv'
   SINA_DD = '%s%s/quotes_service/view/%s?symbol=%s&num=60&page=1&sort=ticktime&asc=0&volume=%s&amount=0&type=0&day=%s'
@@ -132,9 +141,9 @@ module Tushare
                       9M_5 9M_10 9M_20 1Y_5 1Y_10 1Y_20).freeze
   LPR_COLS = %w(date 1Y).freeze
   LPR_MA_COLS = %w(date 1Y_5 1Y_10 1Y_20).freeze
-  INDEX_HEADER = 'code,name,open,preclose,close,high,low,0,0,volume,amount,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,d,c,3\n'
-  INDEX_COLS = ['code', 'name', 'change', 'open', 'preclose', 'close', 'high', 'low', 'volume', 'amount']
-  HIST_FQ_COLS = ['date', 'open', 'high', 'close', 'low', 'volume', 'amount', 'factor']
+  INDEX_HEADER = 'code,name,open,preclose,close,high,low,0,0,volume,amount,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,d,c,3\n'.freeze
+  INDEX_COLS = %w(code name change open preclose close high low volume amount).freeze
+  HIST_FQ_COLS = %w(date open high close low volume amount factor).freeze
   SINA_DD_COLS = ['code', 'name', 'time', 'price', 'volume', 'preprice', 'type']
   HIST_FQ_FACTOR_COLS = ['code','value']
   DATA_GETTING_TIPS = '[Getting data:]'
@@ -220,6 +229,7 @@ module Tushare
   MONEY_SUPPLY_COLS = %w(month m2 m2_yoy m1 m1_yoy m0 m0_yoy cd cd_yoy qm
                          qm_yoy ftd ftd_yoy sd sd_yoy rests rests_yoy).freeze
   MONEY_SUPPLY_BLA_COLS = %w(year m2 m1 m0 cd qm ftd sd rests).freeze
+  ALL_CAL_FILE = format('%s%s/static/calAll.csv', P_TYPE['http'], DOMAINS['oss']).freeze
 
 
   module Util
@@ -259,6 +269,25 @@ module Tushare
       file.close
       File.delete(local_file_path)
       result
+    end
+
+    # 交易日历 isOpen=1是交易日，isOpen=0为休市
+    def trade_cal
+      resp = HTTParty.get(ALL_CAL_FILE)
+      result = []
+      CSV.new(resp.body.encode('utf-8', 'gbk')).drop(1).each do |arr|
+        result << { 'date' => arr[0], 'is_open' => arr[1] }
+      end
+      result
+    end
+
+    # 判断是否为交易日，返回 true or false
+    def holiday?(date)
+      trade_cals = trade_cal
+      holidays = trade_cals.select { |object| object['is_open'] == 0 }
+                           .map { |object| object['date'] }
+      [6, 7].include?(date.cwday) ||
+        holidays.include?(date.strftime('%F'))
     end
   end
 end

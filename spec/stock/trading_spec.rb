@@ -26,8 +26,25 @@ describe Tushare::Stock::Trading do
     it 'can get today ticks' do
       tp @stock.get_today_ticks("600848")
     end
+
     it 'can get today all data' do
       ap @stock.get_today_all
+    end
+
+    it 'can get realtime_quotes data' do
+      tp @stock.get_realtime_quotes(['600006'])
+    end
+
+    it 'can get h_data data' do
+      tp @stock.get_h_data('600036', '2016-04-01', '2016-05-01', 'qfq')
+    end
+
+    it 'can get index data' do
+      tp @stock.get_index
+    end
+
+    it 'can get hists data' do
+      tp @stock.get_hists(%w(300027 600036))
     end
   end
 end
