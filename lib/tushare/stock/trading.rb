@@ -294,7 +294,8 @@ module Tushare
                                          index)
           end
         end
-        first_date = result.first['date']
+        sorted_result = result.sort_by { |object| Date.strptime(object['date'], '%F') }
+        last_date = sorted_result.last['date']
         result = result.uniq { |object| object['date'] }.select do |object|
           date = Date.strptime(object['date'], '%F')
           date >= start_date && date <= end_date
@@ -319,10 +320,10 @@ module Tushare
           result.map { |object| object.delete 'factor' } if drop_factor
           fq_factors = _parse_fq_factor(code, start_date, end_date)
           fq_factors.sort_by! { |object| Date.strptime(object['date'], '%F') }
-          frow = fq_factors.select { |object| object['date'] == first_date }.first
+          frow = fq_factors.select { |object| object['date'] == last_date }.first
           rt = get_realtime_quotes(code)
           return nil if rt.empty?
-          pre_close = if rt.first['high'].to_f == 0 && rt.first['low'].to_f ==0
+          pre_close = if rt.first['high'].to_f == 0 && rt.first['low'].to_f == 0
                         rt.first['pre_close'].to_f
                       elsif holiday? Date.today
                         rt.first['price'].to_f
@@ -334,14 +335,14 @@ module Tushare
           rate = frow['factor'].to_f / pre_close
           result.each do |object|
             %w(open high low close).each do |key|
-              object[key] = object[key].to_f / rate
+              object[key] = (object[key].to_f / rate).round(2)
             end
           end
           result.sort_by { |object| Date.strptime(object['date'], '%F') }
         else
           result.each do |object|
             %w(open high low close).each do |key|
-              object[key] = object[key].to_f / object['factor'].to_f
+              object[key] = (object[key].to_f / object['factor'].to_f).round(2)
             end
             object.delete 'factor' if drop_factor
           end
