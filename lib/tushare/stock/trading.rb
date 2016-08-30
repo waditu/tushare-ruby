@@ -287,6 +287,7 @@ module Tushare
                        .uniq
         _write_head
         result = _parse_fq_data(_get_index_url(index, code, qs[0]), index)
+        return [] if result.empty?
         if qs.length > 1
           1.upto(qs.length - 1).each do |i|
             _write_console
@@ -300,7 +301,6 @@ module Tushare
           date = Date.strptime(object['date'], '%F')
           date >= start_date && date <= end_date
         end
-        return [] if result.empty?
         if index
           return result.sort_by { |object| Date.strptime(object['date'], '%F') }
         end
