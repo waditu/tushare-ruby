@@ -90,7 +90,7 @@ module Tushare
         resp = HTTParty.get(url)
         if resp.code.to_s == '200'
           tb_value = resp.body.encode('utf-8', 'gbk')
-          CSV.new(tb_value, headers: :first_row, encoding: 'utf-8', col_sep: '\t').map { |a| Hash[TICK_COLUMNS.zip(a.fields)] }
+          CSV.new(tb_value, headers: :first_row, encoding: 'utf-8', col_sep: ' ').map { |a| Hash[TICK_COLUMNS.zip(a.fields)] }
         else
           []
         end
