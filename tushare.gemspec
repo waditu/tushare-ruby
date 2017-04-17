@@ -6,15 +6,11 @@ require 'tushare/version'
 Gem::Specification.new do |spec|
   spec.name          = "tushare"
   spec.version       = Tushare::VERSION
-  spec.authors       = ["Robot Jiang"]
-  spec.email         = ["robot.z.jiang@gmail.com"]
-
-  if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com' to prevent pushes to rubygems.org, or delete to allow pushes to any server."
-  end
+  spec.authors       = ["Robot Jiang", "Roger Mo"]
+  spec.email         = ["robot.z.jiang@gmail.com", "ShallmentMo@gmail.com"]
 
   spec.summary       = %q{Tushare-Ruby is ruby version of [tushare](https://github.com/waditu/tushare)}
-  spec.description   = %q{Tushare-Ruby is ruby version of [tushare](https://github.com/waditu/tushare)}
+  spec.description   = %q{Tushare-Ruby is ruby version of [tushare](https://github.com/waditu/tushare). TuShare is a utility for crawling historical data of China stocks}
   spec.homepage      = "https://github.com/waditu/tushare-ruby"
   spec.license       = "MIT"
 
@@ -23,12 +19,12 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "httparty", "~> 0.13.3"
-  spec.add_dependency "nokogiri", "~> 1.6.7"
-  spec.add_dependency "table_print", "~> 1.5.4"
-  spec.add_dependency "awesome_print", "~> 1.6.1"
-  spec.add_dependency "roo", "~> 2.3.2"
-  spec.add_dependency "roo-xls", "~> 1.0.0"
+  spec.add_dependency "httparty", "~> 0.14"
+  spec.add_dependency "nokogiri", "~> 1.7"
+  spec.add_dependency "table_print", "~> 1.5"
+  spec.add_dependency "awesome_print", "~> 1.7"
+  spec.add_dependency "roo", "~> 2.7"
+  spec.add_dependency "roo-xls", "~> 1.0"
 
   spec.add_development_dependency "bundler", "~> 1.8"
   spec.add_development_dependency "rake", "~> 10.0"
