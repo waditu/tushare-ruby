@@ -100,6 +100,12 @@ module Tushare
       #     content, 消息内容（show_content=True的情况下）
       #     ptime, 发布时间
       #     rcounts,阅读次数
+      #
+      #
+      #20170504bug修复
+      #修复获取股吧数据的时候的报错问题
+      #     1. 获取最新消息链接的时候,heads中的链接由于连接到直播间,无法进行内容读取
+      #     2. 获取的res最新文章数据中的li有可能出现空标签的问题,在代码中加入判断去除空链接bug
       def guba_sina(show_content = false)
         url = format(GUBA_SINA_URL, P_TYPE['http'], DOMAINS['sina'])
         doc = Nokogiri::HTML(open(url), nil, 'gbk')
@@ -111,18 +117,20 @@ module Tushare
           link = head.css('a').first
           object[:title] = link.content
           object[:url] = link.attr('href')
-          object.merge!(_guba_content(object[:url]))
+          #object.merge!(_guba_content(object[:url]))
           object.delete(:content) unless  show_content
           result << object
         end
         res.each do |row|
           object = {}
-          link = row.css('a')[1]
-          object[:title] = link.text
-          object[:url] = link.attr('href')
-          object.merge!(_guba_content(object[:url]))
-          object.delete(:content) unless  show_content
-          result << object
+          unless row.css('a').length<2
+            link = row.css('a')[1]
+            object[:title] = link.text
+            object[:url] = link.attr('href')
+            object.merge!(_guba_content(object[:url]))
+            object.delete(:content) unless  show_content
+            result << object
+          end
         end
 
         result
@@ -134,7 +142,7 @@ module Tushare
         doc = Nokogiri::HTML(open(url), nil, 'gbk')
         content = doc.css('div.ilt_p p').text
         ptime = doc.css('div.fl_left.iltp_time span').text
-        rcounts_text = doc.css('div.fl_right.iltp_span span')[1].text
+        rcounts_text = doc.css('div.fl_right.iltp_span span').text
         rcounts = rcounts_text.gsub(/\D/, '')
         { content: content, ptime: ptime, rcounts: rcounts }
       end
