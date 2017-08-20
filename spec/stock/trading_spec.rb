@@ -46,5 +46,11 @@ describe Tushare::Stock::Trading do
     it 'can get hists data' do
       tp @stock.get_hists(%w(300027 600036))
     end
+
+    it 'can get k data' do
+      tp @stock.get_k_data('300027')
+      # tp @stock.get_k_data('300027', '2017-07-03', '2017-08-11')
+      # tp @stock.get_k_data('300027', '2014-07-03', '2017-08-11', 'W', 'hfq')
+    end
   end
 end

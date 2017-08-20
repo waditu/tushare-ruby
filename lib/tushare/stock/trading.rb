@@ -405,7 +405,105 @@ module Tushare
         end
       end
 
+      # 获取k线数据
+      # ---------
+      # Parameters:
+      #   code:string
+      #               股票代码 e.g. 600848
+      #   start_date:string
+      #               开始日期 format：YYYY-MM-DD 为空时取上市首日
+      #   end_date:string
+      #               结束日期 format：YYYY-MM-DD 为空时取最近一个交易日
+      #   autype:string
+      #               复权类型，qfq-前复权 hfq-后复权 None-不复权，默认为qfq
+      #   ktype：string
+      #               数据类型，D=日k线 W=周 M=月 5=5分钟 15=15分钟 30=30分钟 60=60分钟，默认为D
+      #   retry_count : int, 默认 3
+      #              如遇网络等问题重复执行的次数
+      #   pause : int, 默认 0
+      #             重复请求数据过程中暂停的秒数，防止请求间隔时间太短出现的问题
+      # return
+      # -------
+      #   DataFrame
+      #       date 交易日期 (index)
+      #       open 开盘价
+      #       high  最高价
+      #       close 收盘价
+      #       low 最低价
+      #       volume 成交量
+      #       amount 成交额
+      #       turnoverratio 换手率
+      #       code 股票代码
+      def get_k_data(code = nil, start_date = '', end_date = '', ktype = 'D', autype = 'qfq', index = false)
+        symbol = index ? INDEX_SYMBOL[code] : _code_to_symbol(code)
+        dataflag = ''
+        autype = autype.nil? ? '' : autype
+        if !start_date.nil? && start_date != ''
+          end_date = end_date.nil? || end_date == '' ? Date.today.strftime('%Y-%m-%d') : end_date
+        end
+        if K_LABELS.include?(ktype.upcase)
+          fq = !autype.nil? ? autype : ''
+          fq = '' if %w(1 5).include?(code[0]) || index
+          kline = autype.nil? ? '' : 'fq'
+          if (start_date.nil? || start_date == '') && (end_date.nil? || end_date == '')
+            urls = [format(KLINE_TT_URL, P_TYPE['http'], DOMAINS['tt'], kline, fq, symbol, TT_K_TYPE[ktype.upcase], start_date, end_date, fq, _random(17))]
+          else
+            years = tt_dates(start_date, end_date)
+            urls = []
+            years.each do |year|
+              urls.push(format(KLINE_TT_URL, P_TYPE['http'], DOMAINS['tt'], kline, "#{fq}#{year}", symbol, TT_K_TYPE[ktype.upcase], "#{year}-01-01", "#{year + 1}-12-31", fq, _random(17)))
+            end
+          end
+          dataflag = format('%s%s', fq, TT_K_TYPE[ktype.upcase])
+        elsif K_MIN_LABELS.include?(ktype)
+          urls = [format(KLINE_TT_MIN_URL, P_TYPE['http'], DOMAINS['tt'], symbol, ktype, ktype, _random(16))]
+          dataflag = format('m%s', ktype)
+        else
+          throw TypeError.new('ktype input error.')
+        end
+        data = []
+        urls.each do |url|
+          data = data.concat(_get_k_data(url, dataflag, symbol, code, index, ktype))
+        end
+        if !K_MIN_LABELS.include?(ktype) && (!start_date.nil? && start_date != '') && (!end_date.nil? && end_date != '') && !data.empty?
+          start_date = Date.strptime(start_date, '%Y-%m-%d')
+          end_date = Date.strptime(end_date, '%Y-%m-%d')
+          data.select! do |datum|
+            date = Date.strptime(datum['date'], '%Y-%m-%d')
+            start_date <= date && date <= end_date
+          end
+        end
+        data
+      end
+
       protected
+
+        def _get_k_data(url, dataflag = '', symbol = '', code = '', index = false, ktype = '')
+          response = HTTParty.get(url)
+          return [] if response.length < 100
+          response = response.split('=')[1]
+          response.gsub!(/,{"nd.*?}/, '')
+          js = JSON.parse(response)
+          dataflag = js['data'][symbol].keys.include?(dataflag) ? dataflag : TT_K_TYPE[ktype.upcase]
+          return [] if js['data'][symbol][dataflag].length == 0
+          data = []
+          cols = KLINE_TT_COLS
+          if (js['data'][symbol][dataflag][0].length) == 6
+            cols = KLINE_TT_COLS_MINS
+          end
+          js['data'][symbol][dataflag].each do |datum|
+            object = { 'code' => index ? symbol : code }
+            datum.each_with_index do |v, i|
+              if (cols[i] != 'date')
+                object[cols[i]] = v.to_f
+              else
+                object[cols[i]] = v
+              end
+            end
+            data.push(object)
+          end
+          data
+        end
 
         def _parse_fq_factor(code, start_date, end_date)
           symbol = _code_to_symbol(code)
@@ -502,12 +600,18 @@ module Tushare
           rand(start_int..end_int).to_s
         end
 
+        def tt_dates(start_date = '', end_date = '')
+          start_year = start_date[0...4].to_i
+          end_year = end_date[0...4].to_i
+          (start_year..(end_year + 1)).step(2).to_a
+        end
+
       module_function :get_hist_data, :get_tick_data, :get_sina_dd,
                       :get_today_ticks, :get_today_all, :_today_ticks,
                       :_parsing_dayprice_json, :get_realtime_quotes,
                       :_random, :code_to_symbol, :get_h_data, :_parse_fq_factor,
-                      :_get_index_url, :_parse_fq_data, :get_index, :get_hists
+                      :_get_index_url, :_parse_fq_data, :get_index, :get_hists,
+                      :get_k_data, :_get_k_data, :tt_dates
     end
   end
-
 end
