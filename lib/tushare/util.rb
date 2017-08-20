@@ -33,7 +33,7 @@ module Tushare
     'sseq' => 'query.sse.com.cn',
     'sse' => 'www.sse.com.cn',
     'szse' => 'www.szse.cn',
-    'oss' => '218.244.146.57',
+    'oss' => 'file.tushare.org',
     'idxip' => '115.29.204.48',
     'shibor' => 'www.shibor.org',
     'mbox' => 'www.cbooo.cn'
@@ -229,7 +229,7 @@ module Tushare
   MONEY_SUPPLY_COLS = %w(month m2 m2_yoy m1 m1_yoy m0 m0_yoy cd cd_yoy qm
                          qm_yoy ftd ftd_yoy sd sd_yoy rests rests_yoy).freeze
   MONEY_SUPPLY_BLA_COLS = %w(year m2 m1 m0 cd qm ftd sd rests).freeze
-  ALL_CAL_FILE = format('%s%s/static/calAll.csv', P_TYPE['http'], DOMAINS['oss']).freeze
+  ALL_CAL_FILE = format('%s%s/tsdata/calAll.csv', P_TYPE['http'], DOMAINS['oss']).freeze
 
 
   module Util
@@ -289,5 +289,7 @@ module Tushare
       [6, 7].include?(date.cwday) ||
         holidays.include?(date.strftime('%F'))
     end
+
+    module_function :trade_cal, :holiday?
   end
 end
