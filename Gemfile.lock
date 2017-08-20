@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tushare (0.1.0)
+    tushare (0.2.0)
       awesome_print (~> 1.7)
       httparty (~> 0.14)
       nokogiri (~> 1.7)
