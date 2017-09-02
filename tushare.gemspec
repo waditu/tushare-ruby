@@ -21,11 +21,11 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "httparty", "~> 0.14"
   spec.add_dependency "nokogiri", "~> 1.7"
-  spec.add_dependency "table_print", "~> 1.5"
-  spec.add_dependency "awesome_print", "~> 1.7"
   spec.add_dependency "roo", "~> 2.7"
   spec.add_dependency "roo-xls", "~> 1.0"
 
+  spec.add_development_dependency "table_print", "~> 1.5"
+  spec.add_development_dependency "awesome_print", "~> 1.7"
   spec.add_development_dependency "bundler", "~> 1.8"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.4"

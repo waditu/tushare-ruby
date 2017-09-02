@@ -2,29 +2,27 @@ PATH
   remote: .
   specs:
     tushare (0.2.0)
-      awesome_print (~> 1.7)
       httparty (~> 0.14)
       nokogiri (~> 1.7)
       roo (~> 2.7)
       roo-xls (~> 1.0)
-      table_print (~> 1.5)
 
 GEM
   remote: https://rubygems.org/
   specs:
     awesome_print (1.7.0)
     diff-lcs (1.2.5)
-    httparty (0.14.0)
+    httparty (0.15.6)
       multi_xml (>= 0.5.2)
-    mini_portile2 (2.1.0)
+    mini_portile2 (2.2.0)
     multi_xml (0.6.0)
-    nokogiri (1.7.1)
-      mini_portile2 (~> 2.1.0)
+    nokogiri (1.8.0)
+      mini_portile2 (~> 2.2.0)
     rake (10.4.2)
     roo (2.7.1)
       nokogiri (~> 1)
       rubyzip (~> 1.1, < 2.0.0)
-    roo-xls (1.0.0)
+    roo-xls (1.1.0)
       nokogiri
       roo (>= 2.0.0beta1, < 3)
       spreadsheet (> 0.9.0)
@@ -51,9 +49,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print (~> 1.7)
   bundler (~> 1.8)
   rake (~> 10.0)
   rspec (~> 3.4)
+  table_print (~> 1.5)
   tushare!
 
 BUNDLED WITH
