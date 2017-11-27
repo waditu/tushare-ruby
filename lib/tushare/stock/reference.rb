@@ -201,7 +201,11 @@ module Tushare
           arr.map(&:content).map(&:strip)
         end
         last_page_guard = lambda do |doc|
-          doc.css('table.table2 tr:first td:first a').last.text != '尾页'
+          if doc.css('table.table2 tr:first td:first a').size > 0
+            doc.css('table.table2 tr:first td:first a').last.text != '尾页'
+          else
+            true
+          end
         end
         get_data(1, NEW_STOCKS_COLS, doc_generator, row_finder,
                  row_processor, last_page_guard)
